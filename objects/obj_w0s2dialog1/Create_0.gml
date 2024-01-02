@@ -1,0 +1,17 @@
+action_inherited();
+scr_dialog("tv","BRAVO!            #BRAVO!            #YOU DID GREAT MY FRIEND!")
+scr_dialog("dude","huh,              #I actually didn't do#that bad!")
+scr_dialog("tv","DO YOU WISH TO#SAVE YOUR SCORE?")
+scr_dialog("dude","heckles yeah!        #I bet I got a highscore#or something!")
+scr_dialog("tv","INCORRECT.")
+scr_dialog("tv","UNFORTUNATELY YOU WEREN'T EVEN#CLOSE TO BEATING THE TOP SCORE")
+scr_dialog("tv","THE OWNER OF THE TOP#SCORE IS USER, ^P[STRAD]^W")
+scr_dialog("dude","what! no way!          #what was his score?")
+scr_dialog("dude","!!!")
+scr_dialog("dude","dude holy crap your dad's score#doesn't even fit on screen!")
+scr_dialog("dude","y'know maybe this plan isn't#such a good idea.")
+scr_dialog("lady","e")
+scr_dialog("strad","hey kiddos what'cha doing?")
+scr_dialog("dude","...")
+scr_dialog("peeb","")
+

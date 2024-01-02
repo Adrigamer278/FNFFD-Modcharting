@@ -1,0 +1,455 @@
+Convirtiendo script GML: ${project_dir}\scripts\scr_songint\scr_songint.gml
+Descripción convertida /// @description scr_songint(songtype,song)/// @param songtype
+/// @param song
+Cadena convertida - línea 405: "songs\" -> "songs\\"
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_charset\scr_charset.gml
+Descripción convertida /// @description scr_charset(player,baddie)/// @param player
+/// @param baddie
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_charpos\scr_charpos.gml
+Descripción convertida /// @description scr_charpos(Badguy X, Badguy Y, Player X, Player Y, Lady X, Lady Y)/// @param Badguy X
+/// @param  Badguy Y
+/// @param  Player X
+/// @param  Player Y
+/// @param  Lady X
+/// @param  Lady Y
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_skipintrosprite\scr_skipintrosprite.gml
+Descripción convertida /// @description scr_skipintrosprite(songtype,song)/// @param songtype
+/// @param song
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_keytoname\scr_keytoname.gml
+Descripción convertida /// @description  key_to_string( key )/// @param  key
+Cadena convertida - línea 67: "\" -> "\\"
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_drawcd\scr_drawcd.gml
+Descripción convertida /// @description scr_drawcd(x,y)/// @param x
+/// @param y
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_highlight\scr_highlight.gml
+Descripción convertida /// @description scr_highlight(color replace,color highlight)/// @param color replace
+/// @param color highlight
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_silhouette\scr_silhouette.gml
+Descripción convertida /// @description scr_silhouette(color replace)/// @param color replace
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_dialog\scr_dialog.gml
+Descripción convertida /// @description scr_dialog(character voice,string)/// @param character voice
+/// @param string
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_cbounce\scr_cbounce.gml
+Descripción convertida /// @description scr_cbounce(first beat,second beat,third beat,fourth beat,frequency)/// @param first beat
+/// @param second beat
+/// @param third beat
+/// @param fourth beat
+/// @param frequency
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_fpadd\scr_fpadd.gml
+Descripción convertida /// @description scr_fpadd(name, icon increase)/// @param name
+/// @param  icon increase
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_screenborder\scr_screenborder.gml
+Descripción convertida /// @description scr_screenborder(intensity, alpha)/// @param intensity
+/// @param  alpha
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_playsong\scr_playsong.gml
+Descripción convertida /// @description scr_playsong(song, fadein time)/// @param song
+/// @param  fadein time
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_stopsong\scr_stopsong.gml
+Descripción convertida /// @description scr_stopsong(song,fade out time)/// @param song
+/// @param fade out time
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_nextbox\scr_nextbox.gml
+Descripción convertida /// @description scr_nextbox(advance the textbox)/// @param advance the textbox
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_nextframe\scr_nextframe.gml
+Descripción convertida /// @description scr_nextframe(image_index)/// @param image_index
+
+Convirtiendo script GML: ${project_dir}\scripts\scr_shadercheck\scr_shadercheck.gml
+Descripción convertida /// @description scr_shadercheck(shader name, shader arguments)/// @param shader name
+/// @param  shader arguments
+
+La fuente fnt_comic1 se ha convertido a la familia de fuentes Comic Sans MS (Regular)
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt_comic1\fnt_comic1.gms1.png
+La fuente fnt_comic1b se ha convertido a la familia de fuentes Comic Sans MS (Bold)
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt_comic1b\fnt_comic1b.gms1.png
+La fuente fnt_comic2 se ha convertido a la familia de fuentes Comic Sans MS (Regular)
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt_comic2\fnt_comic2.gms1.png
+!!! La fuente fnt_tutorial usa una fuente (8BIT WONDER) no instalada en este sistema - La fuente NO se ha regenerado
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt_tutorial\fnt_tutorial.gms1.png
+!!! La fuente fnt_infographic usa una fuente (8-bit Arcade In) no instalada en este sistema - La fuente NO se ha regenerado
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt_infographic\fnt_infographic.gms1.png
+!!! La fuente fnt usa una fuente (GRAND FINALE) no instalada en este sistema - La fuente NO se ha regenerado
+Se ha realizado una copia de seguridad de la textura de la fuente de GameMaker Studio 1 en ${project_dir}\fonts\fnt\fnt.gms1.png
+Convirtiendo script GML: ${project_dir}\objects\obj_midi_clock\Draw_0.gml
+Descripción convertida /// @description Show Clock
+
+Convirtiendo script GML: ${project_dir}\objects\obj_stats\Other_4.gml
+Descripción convertida /// @description fade in and save
+
+Convirtiendo script GML: ${project_dir}\objects\obj_stats\Other_3.gml
+Descripción convertida /// @description save game
+
+Convirtiendo script GML: ${project_dir}\objects\obj_stats\Draw_75.gml
+Cadena incluida - línea 2: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+Cadena incluida - línea 3: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_song\Create_0.gml
+Descripción convertida /// @description ui variables
+
+Convirtiendo script GML: ${project_dir}\objects\obj_song\Step_2.gml
+Descripción convertida /// @description clamps
+
+Convirtiendo script GML: ${project_dir}\objects\obj_song\Other_5.gml
+Descripción convertida /// @description clear sprites and surfaces
+
+Convirtiendo script GML: ${project_dir}\objects\obj_song\Draw_64.gml
+Cadena incluida - línea 259: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 259: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+Descripción convertida /// @description screen effects
+
+Convirtiendo script GML: ${project_dir}\objects\obj_song\Draw_0.gml
+Descripción convertida /// @description stagehand
+
+Convirtiendo script GML: ${project_dir}\objects\obj_freeplay\Step_0.gml
+Descripción convertida /// @description controlls
+
+Convirtiendo script GML: ${project_dir}\objects\obj_discord\Draw_64.gml
+Cadena incluida - línea 8: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 8: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_titlegf\Step_0.gml
+Descripción convertida /// @description bopping
+
+Convirtiendo script GML: ${project_dir}\objects\obj_titlegf\Other_62.gml
+Descripción convertida /// @description update checker
+
+Convirtiendo script GML: ${project_dir}\objects\obj_titlegf\Draw_64.gml
+Descripción convertida /// @description HEY THIS IS OLD!
+
+Convirtiendo script GML: ${project_dir}\objects\obj_charting\Step_0.gml
+Descripción convertida /// @description controlls + stuff
+
+Convirtiendo script GML: ${project_dir}\objects\obj_charting\Draw_73.gml
+Descripción convertida /// @description line + minimap
+
+Convirtiendo script GML: ${project_dir}\objects\obj_charting\Draw_72.gml
+Descripción convertida /// @description images
+
+Convirtiendo script GML: ${project_dir}\objects\obj_charting\Draw_0.gml
+Descripción convertida /// @description text
+
+Convirtiendo script GML: ${project_dir}\objects\obj_note\Step_1.gml
+Descripción convertida /// @description double note fix FIX THE CRAP
+
+Convirtiendo script GML: ${project_dir}\objects\obj_note\Draw_73.gml
+Descripción convertida /// @description drawing notes
+
+Convirtiendo script GML: ${project_dir}\objects\obj_note\Draw_0.gml
+Descripción convertida /// @description hold note caps
+
+Convirtiendo script GML: ${project_dir}\objects\obj_camera\Step_0.gml
+Cadena incluida - línea 2: view_xview[0]=x-view_wview/2 -> __view_set( e__VW.XView, 0, x-view_wview/2 )
+Cadena incluida - línea 3: view_yview[0]=y-view_hview/2 -> __view_set( e__VW.YView, 0, y-view_hview/2 )
+Cadena incluida - línea 4: view_wview[0]=image_xscale -> __view_set( e__VW.WView, 0, image_xscale )
+Cadena incluida - línea 5: view_hview[0]=image_xscale -> __view_set( e__VW.HView, 0, image_xscale )
+Cadena incluida - línea 6: view_angle[0]=image_angle -> __view_set( e__VW.Angle, 0, image_angle )
+Cadena incluida - línea 2: view_wview -> __view_get( e__VW.WView, 0 )
+Cadena incluida - línea 3: view_hview -> __view_get( e__VW.HView, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_player\Step_0.gml
+Descripción convertida /// @description key press old
+
+Convirtiendo script GML: ${project_dir}\objects\obj_player\Draw_0.gml
+Descripción convertida /// @description skins
+
+Convirtiendo script GML: ${project_dir}\objects\obj_gameover\Alarm_1.gml
+Descripción convertida /// @description jokes over
+
+Convirtiendo script GML: ${project_dir}\objects\obj_gameover\Alarm_0.gml
+Descripción convertida /// @description go back to stage
+
+Convirtiendo script GML: ${project_dir}\objects\obj_gameover\Draw_73.gml
+Descripción convertida /// @description funny reveal
+
+Convirtiendo script GML: ${project_dir}\objects\obj_gameover\Draw_0.gml
+Descripción convertida /// @description dude and text
+
+Convirtiendo script GML: ${project_dir}\objects\obj_lady\Step_0.gml
+Descripción convertida /// @description old code
+
+Convirtiendo script GML: ${project_dir}\objects\obj_lady\Draw_0.gml
+Descripción convertida /// @description new code
+
+Convirtiendo script GML: ${project_dir}\objects\obj_badguy\Step_0.gml
+Descripción convertida /// @description hit note new
+
+Convirtiendo script GML: ${project_dir}\objects\obj_mimic\Create_0.gml
+Descripción convertida /// @description boob
+
+Convirtiendo script GML: ${project_dir}\objects\obj_nermal\Create_0.gml
+Descripción convertida /// @description /peeeb
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w0s1dialog1\Alarm_11.gml
+Descripción convertida /// @description knock knock
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w0s2dialog1\Alarm_4.gml
+Descripción convertida /// @description now go away
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w2s1dialog1\Alarm_4.gml
+Descripción convertida /// @description WHAM!!!
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w2s1dialog1\Alarm_3.gml
+Descripción convertida /// @description funny cyan scene
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w2s2dialog1\Create_0.gml
+Cadena convertida - línea 29: "\/" -> "\\/"
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w3s1dialog1\Alarm_3.gml
+Descripción convertida /// @description buddy arm break
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w3s2dialog1\Alarm_3.gml
+Descripción convertida /// @description door slam
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w3s2dialog1\Draw_0.gml
+Descripción convertida /// @description O .
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s1dialog1\Alarm_4.gml
+Descripción convertida /// @description roomba (BEST JOKE IN THE UPDATE)/// @param BEST JOKE IN THE UPDATE
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s1dialog1\Alarm_3.gml
+Descripción convertida /// @description gunk peeking
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog1\Alarm_6.gml
+Descripción convertida /// @description ds
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog1\Alarm_5.gml
+Descripción convertida /// @description cyan jump
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog1\Alarm_4.gml
+Descripción convertida /// @description gunk unplug cutscene-ception
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog1\Alarm_3.gml
+Descripción convertida /// @description gunk oh shit
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog1\Draw_0.gml
+Cadena incluida - línea 13: view_xview[0]+=0.046/2 -> __view_set( e__VW.XView, 0, __view_get( e__VW.XView, 0 ) + (0.046/2) )
+Cadena incluida - línea 18: view_xview[0]=0 -> __view_set( e__VW.XView, 0, 0 )
+Cadena incluida - línea 14: view_yview[0]+=0.046/2 -> __view_set( e__VW.YView, 0, __view_get( e__VW.YView, 0 ) + (0.046/2) )
+Cadena incluida - línea 19: view_yview[0]=0 -> __view_set( e__VW.YView, 0, 0 )
+Cadena incluida - línea 11: view_wview[0]-=0.046 -> __view_set( e__VW.WView, 0, __view_get( e__VW.WView, 0 ) - (0.046) )
+Cadena incluida - línea 16: view_wview[0]=400 -> __view_set( e__VW.WView, 0, 400 )
+Cadena incluida - línea 12: view_hview[0]-=0.046 -> __view_set( e__VW.HView, 0, __view_get( e__VW.HView, 0 ) - (0.046) )
+Cadena incluida - línea 17: view_hview[0]=400 -> __view_set( e__VW.HView, 0, 400 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog2\Create_0.gml
+Cadena incluida - línea 63: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 63: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog2\Alarm_11.gml
+Descripción convertida /// @description lady string
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog2\Alarm_3.gml
+Descripción convertida /// @description animate gunk falling
+
+Convirtiendo script GML: ${project_dir}\objects\obj_w4s2dialog2\Draw_64.gml
+Cadena incluida - línea 3: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 19: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 3: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_unlocksong\Alarm_1.gml
+Descripción convertida /// @description leave
+
+Convirtiendo script GML: ${project_dir}\objects\obj_unlocksong\Draw_64.gml
+Descripción convertida /// @description ntsc
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Create_0.gml
+Descripción convertida /// @description text vars
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Destroy_0.gml
+Descripción convertida /// @description cutscene ending
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Alarm_2.gml
+Descripción convertida /// @description next textbox
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Alarm_1.gml
+Descripción convertida /// @description update frame
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Alarm_0.gml
+Descripción convertida /// @description unfreeze textbox
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Step_2.gml
+Descripción convertida /// @description make updating last 1 frame
+
+Convirtiendo script GML: ${project_dir}\objects\obj_textbox\Step_0.gml
+Descripción convertida /// @description text scrolling
+
+Convirtiendo script GML: ${project_dir}\objects\obj_fadeout\Draw_64.gml
+Cadena incluida - línea 1: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 1: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_fadein\Draw_64.gml
+Cadena incluida - línea 1: view_wport[0] -> __view_get( e__VW.WPort, 0 )
+Cadena incluida - línea 1: view_hport[0] -> __view_get( e__VW.HPort, 0 )
+
+Convirtiendo script GML: ${project_dir}\objects\obj_fireworkcreator\Draw_72.gml
+Descripción convertida /// @description crazy background
+
+Convirtiendo script GML: ${project_dir}\objects\obj_soundtest\Draw_0.gml
+Descripción convertida /// @description background
+
+Falta el grupo de audio para el sonido: "snd_josh" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_whehehe" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_tutorial" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w1s1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w1s2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w2s1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w2s2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w3s1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w3s2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w4s1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w4s2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_frostbytep1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_frostbytep2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_channelsurf" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_breakitdown" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_cinemassacre" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_birthdayboy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_crazyjohnny" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_bozo" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_ohcrap" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_menu" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_gameover" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_pictocyan" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_eyestrain" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_player2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_unknownvariable" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_arkaid" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_mysweetheart" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_bbbb" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_howdoileavetheoptionsmenu" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_howdoileavetheoptionsmenu_alt" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_w1s2_slow_reverb" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_twibilledcamera" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_gimmeabreak" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_kindaAbadass" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_cats" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_specialguest" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_buddy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_fumpsbreakfast" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_brainrot" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_gunkedup" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_popstar_min" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_popstar" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_birthdaybash" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_spotlights" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "mus_you_probably_should_be_gettin_home" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_3" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_go" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_oh" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_ha" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_yousuck" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_errortalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dudetalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_stradtalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_ladytalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_tvtalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cyantalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboytalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboy_c" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboy_t" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboy_e" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_buddytalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_vinyltalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_gunktalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dantalk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crowd0" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crowd1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crowd2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crowd3" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dudeayy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crap" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_ladyyay" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cyanayy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_buddyayy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboynice" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboygood" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboyvgood" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboybravo" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_gunkayy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_danayy" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unlockall" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unlockinfo" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unlockchannel" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unlocktriangle" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unlockdan" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_ribbit1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_ribbit2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_bomb1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_bomb2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_bomb3" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdow" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdowch" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdpain" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdbad" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_win" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_own" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_gasp" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_plstart" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_plmove" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_plstop" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_recordscratch" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_yoloalarm" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_yoloalarm1" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_yoloalarm2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_yoloalarm3" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_failure2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_doorslam" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_OHSHIT" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_doorknock" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_digdeeper" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_static" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_owch" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_spookystrad" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_explode" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_weirdnoise" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_WHAM" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_missing" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_bonebreak" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_buddyyelp" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_doorslam2" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dooropen" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_cdboydeath" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_blink" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dwuh" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_hoodie" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_spookygunk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_animewow" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_crowd" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_gunkugh" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_firework" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_gutsup" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_unplug" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_default" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_walk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_nonmember" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_straddunk" - pasando el grupo de audio a predeterminado
+Falta el grupo de audio para el sonido: "snd_dsflop" - pasando el grupo de audio a predeterminado
+Velocidad del juego fijada en 60
+Añadido el script de compatibilidad "action/action_if_variable.gml"
+Añadido el script de compatibilidad "action/action_inherited.gml"
+Añadido el script de compatibilidad "draw/draw_set_blend_mode.gml"
+Añadido el script de compatibilidad "draw/draw_set_color_write_enable.gml"
+Añadido el script de compatibilidad "instance/instance_create.gml"
+Añadido el script de compatibilidad "object/object_get_depth.gml"
+Añadido el script de compatibilidad "view/__view_get.gml"
+Añadido el script de compatibilidad "view/__view_set.gml"
+Añadido el script de compatibilidad "view/__view_set_internal.gml"
+Añadido el script de compatibilidad "action/__init_action.gml"
+Añadido el script de compatibilidad "view/__init_view.gml"
+Añadido el script de compatibilidad "__init_global.gml"
+Añadido el script de compatibilidad "__global_object_depths.gml"
