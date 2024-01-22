@@ -21,8 +21,11 @@ pu=true //if unpause updates stuff
 //actions
 aindex=0
 //song vars
-var m;
-for(m=mus_birthdayboy;m<snd_3;m++) {
+
+show_debug_message(mus_birthdayboy);
+show_debug_message(snd_3);
+
+for(var m=real(mus_birthdayboy);m<real(snd_3);m++) {
     song[m]=0
 }
 scr_textboxcoloring();

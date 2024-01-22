@@ -40,7 +40,7 @@ if songlength <= 1 && (!(os_browser == browser_not_a_browser) || os_type == os_o
 } else {
 	if wasStreaming {
 		wasStreaming = false
-		scr_songint(obj_stats.typegoing,obj_stats.weekgoing);
+		scr_songint(obj_stats.songgoing[0],obj_stats.catgoing);
 	}
 }
 
@@ -162,19 +162,25 @@ if window_has_focus() {
 //end song
     if songpos>=(songlength-0.1) {
         //scoreing
-        var type=obj_stats.typegoing
-        var songgo=obj_stats.weekgoing
         if saved=false {
             //im going to redo all of this when I remake all these menus and
             //this is going to be so much better
-            if coolscore>obj_stats.songscore[type,songgo] {
-                obj_stats.songscore[type,songgo]=coolscore
-                obj_stats.songmiss[type,songgo]=misses
-                scr_saveoptions();
-                saved=true
+            if coolscore>obj_stats.songgoing[1].score {
+                obj_stats.songgoing[1].score=coolscore
             }
+			
+			if misses<obj_stats.songgoing[1].misses || !obj_stats.songgoing[1].beat {
+                obj_stats.songgoing[1].misses=misses
+            }
+			
+			obj_stats.songgoing[1].beat = true;
+			obj_stats.songgoing[1].timesPlayed += 1;
+			obj_stats.songgoing[1].isNew = false;
+			
+			saved=true
+			scr_saveoptions();
         }
-        obj_stats.songnew[type,songgo]=false
+		obj_stats.songgoing[1].isNew = false;
         obj_stats.skipped=false
         //where to go
         if obj_stats.freeplay = false {

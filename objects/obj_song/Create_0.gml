@@ -102,7 +102,7 @@ wavedude=false
 sel=0
 event=0
 saved=false
-scr_songint(obj_stats.typegoing,obj_stats.weekgoing);
+scr_songint(obj_stats.songgoing[0],obj_stats.catgoing);
 
 crochet = (60 / bpm);
 stepCrochet = crochet/4;

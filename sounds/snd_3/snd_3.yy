@@ -10,7 +10,7 @@
   "bitRate": 192,
   "compression": 3,
   "conversionMode": 0,
-  "duration": 0.0,
+  "duration": 0.428571,
   "parent": {
     "name": "countdown",
     "path": "folders/Sonidos/soundeffects/countdown.yy",

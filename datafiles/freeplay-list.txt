@@ -1,0 +1,37 @@
+--songname/(sprite:frame <or> imagename.extension (located under images/icons)/weekend:startBlocked
+-- todo -> :frame-endFrame-framerate (for animated icons)
+-- REMINDER FRAMES START AT 0
+-- (-- or // for comments)
+
+-- "commands"
+-- _startSelection (sets the first selection obj to the song under it)
+-- _notEnter (self explanatory)
+-- _misplaced (the sounds)
+
+-- secret / unlockable songs
+
+-- misplaced always unlocked
+
+_notEnter
+_misplaced
+misplaced/spr_freeplayicons:0/7:false
+cinemassacre/spr_freeplayicons:1/4:true
+break it down triangle man/spr_freeplayicons:2/3:true
+channelsurfing & nermal/spr_freeplayicons:3/2:true
+infographic/spr_freeplayicons:4/1:true
+
+_startSelection
+
+-- main songs
+i, robot/spr_freeplayicons:5/0:false
+summer/spr_freeplayicons:6/1:false
+stars/spr_freeplayicons:6/1:false
+girl next door/spr_freeplayicons:7/2:false
+gamejack/spr_freeplayicons:8/2:false
+twinkle/spr_freeplayicons:9/3:false
+tsunami/spr_freeplayicons:9/3:false
+satellite/spr_freeplayicons:10/4:false
+starfire/spr_freeplayicons:10/4:false
+
+-- extra test
+killing/withhammers.png/4:false

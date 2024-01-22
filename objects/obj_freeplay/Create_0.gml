@@ -1,5 +1,8 @@
 soap=0
-scr_fpadd("misplaced",0)
+curCat = 0
+sel= obj_stats.categoriesData[curCat].selection
+
+/*scr_fpadd("misplaced",0)
 scr_fpadd("cinemassacre",1)
 scr_fpadd("break it down triangle man",1)
 scr_fpadd("channelsurfing & nermal",1)
@@ -12,8 +15,8 @@ scr_fpadd("gamejack",1)
 scr_fpadd("twinkle",1)
 scr_fpadd("tsunami",0)
 scr_fpadd("satellite",1)
-scr_fpadd("starfire",0)
-sel=0-obj_stats.mini
+scr_fpadd("starfire",0)*/
+
 //these are just for the cool backgrounds wtf
 byy=y
 cc=0

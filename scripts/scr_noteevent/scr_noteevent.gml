@@ -459,7 +459,7 @@ function scr_noteevent(argument0, argument1) {
 	                        y=352
 	                    }
 	                    song=mus_frostbytep2
-	                    scr_songint(1,0.1); //load part 2
+	                    scr_songint("infographicp2",0); //load part 2
 	                    obj_badguy.everybeat=1
 	                    songplaying=audio_play_sound(mus_frostbytep2,9999,false) //lpay new song
 	                }

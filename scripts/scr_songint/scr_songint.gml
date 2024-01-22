@@ -2,404 +2,399 @@
 /// @param songtype
 /// @param song
 
-function scr_songint(argument0, argument1) {
+function scr_songint(songname, category) {
+	
+	if category = undefined { category = 0}
+	
 	//setting stage
-	if obj_stats.joshmode=false {
-	    switch(argument0) {
-	        case 1: //BONUS!!
-	            switch(argument1) {
-	                case 3: //cinemassacre
-	                    song=mus_cinemassacre
-	                    ntsc=true
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_danbg
-	                    //characters
-	                    scr_charset(0,-7)
-	                    scr_charpos(200,297,460,297,-1,-1)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=obj_player.x-50
-	                        xgo[badguyc]=obj_badguy.x+50
-	                        xgo[mainc]=324
-	                        x=xgo[mainc]
-	                    }
-	                    //pause music variables
-	                    pausesong=-1
-	                    pausevol=0
-	                    pausetime=0
-	                break;
-	                case 2: //break it down
-	                    song=mus_breakitdown
-	                    weeknd3=true
-	                    obj_song.weeknd3m=0.65
-	                    ntsc=true
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_bidbg
-	                    //characters
-	                    scr_charset(0,-6)
-	                    scr_charpos(120,320,pbx,pby,200,lby)
-	                    obj_badguy.everybeat=2
-	                    obj_player.everybeat=2
-	                    obj_lady.sprite_index=spr_georgetv
-	                    obj_lady.drawgirl=false
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=300//320
-	                        ygo[playerc]=250//200
-	                        big[playerc]=200
-	                        xgo[badguyc]=123
-	                        ygo[badguyc]=200
-	                        big[badguyc]=200
-	                        xgo[mainc]=200
-	                        ygo[mainc]=200
-	                        big[mainc]=400
-	                    }
-	                break;
-	                case 1: //channelsurf & nermal
-	                    song=mus_channelsurf
-	                    ntsc=true
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_screensurfingbg
-	                    //character
-	                    scr_charset(0,-4)
-	                    scr_charpos(120,320,pbx,pby,200,lby+10)
-	                    obj_lady.sprite_index=spr_cstv
-	                    obj_lady.drawgirl=false
-	                    //nermal
-	                    instance_create(obj_badguy.x-65,obj_badguy.y+5,obj_nermal)
-	                    obj_nermal.depth=obj_badguy.depth-1
-	                break;
-	                case 0: //infographic
-	                    song=mus_frostbytep1
-	                    ntsc=true
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_georgeback
-	                    instance_create(-100,114,obj_georgetrain)
-	                    //positioning
-	                    obj_player.x=320
-	                    obj_player.y=320
-	                    obj_badguy.x=64
-	                    obj_badguy.y=320
-	                    //characters
-	                    scr_charset(0,-2)
-	                    scr_charpos(64,320,320,320,200,lby+10)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=290
-	                        ygo[playerc]=272
-	                        big[playerc]=200
-	                        xgo[badguyc]=96
-	                        ygo[badguyc]=200
-	                        big[badguyc]=200
-	                        xgo[mainc]=200
-	                        ygo[mainc]=200
-	                        big[mainc]=400
-	                    }
-	                    //kill lady (canon)
-	                    obj_lady.x=200
-	                    obj_lady.y+=10
-	                    obj_lady.sprite_index=spr_georgetv
-	                    obj_lady.drawgirl=false
-	                break;
-	                case 0.1:
-	                    //song
-	                    skipto=0
-	                    song=mus_frostbytep2
-	                break;
+	if obj_stats.joshmode=false && category = 0 {
+	    switch(songname) {
+			case "cinemassacre": //cinemassacre
+	            song=mus_cinemassacre
+	            ntsc=true
+	            //background
+	            obj_backgroundp1.sprite_index=spr_danbg
+	            //characters
+	            scr_charset(0,-7)
+	            scr_charpos(200,297,460,297,-1,-1)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=obj_player.x-50
+	                xgo[badguyc]=obj_badguy.x+50
+	                xgo[mainc]=324
+	                x=xgo[mainc]
+	            }
+	            //pause music variables
+	            pausesong=-1
+	            pausevol=0
+	            pausetime=0
+	        break;
+	        case "break it down triangle man": //break it down
+	            song=mus_breakitdown
+	            weeknd3=true
+	            obj_song.weeknd3m=0.65
+	            ntsc=true
+	            //background
+	            obj_backgroundp1.sprite_index=spr_bidbg
+	            //characters
+	            scr_charset(0,-6)
+	            scr_charpos(120,320,pbx,pby,200,lby)
+	            obj_badguy.everybeat=2
+	            obj_player.everybeat=2
+	            obj_lady.sprite_index=spr_georgetv
+	            obj_lady.drawgirl=false
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=300//320
+	                ygo[playerc]=250//200
+	                big[playerc]=200
+	                xgo[badguyc]=123
+	                ygo[badguyc]=200
+	                big[badguyc]=200
+	                xgo[mainc]=200
+	                ygo[mainc]=200
+	                big[mainc]=400
 	            }
 	        break;
-	        case 0:
-	            switch(argument1) {
-	                case 0: //tutorial
-	                    song=mus_tutorial
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_tutorialback
-	                    instance_create(130,189,obj_tutorialguys)
-	                    //characters
-	                    scr_charset(1,0)
-	                    scr_charpos(64,320,300,320,-1,-1)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=290
-	                        ygo[playerc]=272
-	                        big[playerc]=200
-	                        xgo[badguyc]=96
-	                        ygo[badguyc]=272
-	                        big[badguyc]=200
-	                        xgo[mainc]=200
-	                        ygo[mainc]=200
-	                        big[mainc]=400
-	                    }
-	                break;
-	                case 1: //summer
-	                    song=mus_w1s1
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_houseback1
-	                    obj_backgroundp1.y=87
-	                    //character
-	                    scr_charset(0,1)
-	                    scr_charpos(244,368,578,368,420,343)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=559
-	                        ygo[playerc]=260
-	                        big[playerc]=400
-	                        xgo[badguyc]=260
-	                        ygo[badguyc]=260
-	                        big[badguyc]=400
-	                        xgo[mainc]=420
-	                        ygo[mainc]=260
-	                        big[mainc]=400
-	                        x=xgo[mainc]
-	                        y=ygo[mainc]
-	                    }
-	                break;
-	                case 2: //stars
-	                    song=mus_w1s2
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_houseback1
-	                    obj_backgroundp1.y=87
-	                    //character
-	                    scr_charset(0,1)
-	                    scr_charpos(244,368,578,368,420,343)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=559
-	                        ygo[playerc]=260
-	                        big[playerc]=400
-	                        xgo[badguyc]=260
-	                        ygo[badguyc]=260
-	                        big[badguyc]=400
-	                        xgo[mainc]=420
-	                        ygo[mainc]=260
-	                        big[mainc]=400
-	                        x=xgo[mainc]
-	                        y=ygo[mainc]
-	                    }
-	                break;
-	                case 3: //girl next door
-	                    song=mus_w2s1
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_busback
-	                    //characters
-	                    scr_charset(0,2)
-	                    scr_charpos(190,303,448,306,313,262)
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=397
-	                        ygo[playerc]=219
-	                        big[playerc]=400
-	                        xgo[badguyc]=213
-	                        ygo[badguyc]=201
-	                        big[badguyc]=400
-	                        xgo[mainc]=308
-	                        ygo[mainc]=197
-	                        big[mainc]=400
-	                        x=xgo[mainc]
-	                        y=ygo[mainc]
-	                    }
-	                    //I never made a script for setting lady's sprites oops
-	                    var k;
-	                    for (k=0;k<8;k++) {
-	                        if k%2=0 or k=0 {
-	                            obj_lady.sprite[k]=spr_ladyidleleftw2
-	                        } else {
-	                            obj_lady.sprite[k]=spr_ladyidlerightw2
-	                        }
-	                    }
-	                break;
-	                case 4: //gamejack
-	                    song=mus_w2s2
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_busback
-	                    //characters
-	                    scr_charset(1,0)
-	                    scr_charpos(170,303,420,306,313,262)
-	                    obj_lady.drawgirl=false
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=397
-	                        ygo[playerc]=200
-	                        big[playerc]=400
-	                        xgo[badguyc]=213
-	                        ygo[badguyc]=201
-	                        big[badguyc]=400
-	                        xgo[mainc]=308
-	                        ygo[mainc]=200//197
-	                        big[mainc]=400
-	                    }
-	                break;
-	                case 5: //twinkle
-	                    song=mus_w3s1
-	                    weeknd3=true
-	                    weeknd3m=0.5
-	                    obj_song.mmm=0.6
-	                    obj_song.mmmm=0.6
-	                    //background
-	                    obj_backgroundp1.image_alpha=0
-	                    //characters
-	                    scr_charset(0,4)
-	                    scr_charpos(185,bby,400,pby,276,310)
-	                    obj_lady.image_index=spr_speakeroff
-	                    //still didn't make that script
-	                    var k;
-	                    for (k=0;k<8;k++) {
-	                        obj_lady.sprite[k]=spr_cdboyidlestill
-	                    }
-	                    //camera
-	                    if obj_stats.downscroll=true {
-	                        var pluscamera=35;
-	                    } else {
-	                        var pluscamera=0;
-	                    }
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=358
-	                        ygo[playerc]=200+pluscamera
-	                        big[playerc]=400
-	                        xgo[badguyc]=210//176
-	                        ygo[badguyc]=200+pluscamera
-	                        big[badguyc]=400
-	                        xgo[mainc]=280
-	                        ygo[mainc]=200+pluscamera
-	                        big[mainc]=400
-	                        //set camera pos
-	                        x=280
-	                        y=200
-	                    }
-	                    //dude and buddy anime segment
-	                    dudeasurf=-1
-	                    buddyasurf=-1
-	                    //tv screen "id"s
-	                    var tv;
-	                    for(tv=0;tv<=15;tv++) {
-	                        screen[tv,0]="dark"
-	                        screen[tv,1]=surface_create(45,45)
-	                    }
-	                    //dingle
-	                    dingle=surface_create(45,45)
-	                break;
-	                case 6: //tsunami
-	                    song=mus_w3s2
-	                    weeknd3=true
-	                    weeknd3m=0
-	                    obj_song.mm="nothing"
-	                    //characters
-	                    scr_charset(0,3) //5
-	                    scr_charpos(185,bby,425,pby,276,310)
-	                    with(obj_badguy) { cdboy=surface_create(200,200); }
-	                    instance_create(obj_player.x-70,obj_player.y-6,obj_nermal)
-	                    with(obj_nermal) {
-	                        image_xscale=1.125 //I drew buddy too small so this is my admititly lazy fix for that :P
-	                        idle[playerc]=spr_buddyidlet
-	                        anim[playerc]=spr_buddyleftt
-	                        anim[badguyc]=spr_buddydownt
-	                        anim[mainc]=spr_buddyupt
-	                        anim[3]=spr_buddyrightt
-	                        pause=spr_buddypauset
-	                    }
-	                    obj_lady.image_index=spr_speakeroff        
-	                    //camera
-	                    if obj_stats.downscroll=true {
-	                        var pluscamera=35;
-	                    } else {
-	                        var pluscamera=0;
-	                    }
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=385
-	                        ygo[playerc]=225//+pluscamera
-	                        big[playerc]=200
-	                        xgo[badguyc]=180
-	                        ygo[badguyc]=235//+pluscamera
-	                        big[badguyc]=200
-	                        xgo[mainc]=280
-	                        ygo[mainc]=200+pluscamera
-	                        big[mainc]=400
-	                        //set camera pos
-	                        x=280
-	                        y=200
-	                    }
-	                    //tv screen "id"s
-	                    var tv;
-	                    for(tv=0;tv<=15;tv++) {
-	                        screen[tv,0]="colorlight"
-	                        screen[tv,1]=0
-	                    }
-	                break;
-	                case 7: //satellite
-	                    song=mus_w4s1
-	                    obj_song.event=3
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_gunkstage1
-	                    //characters
-	                    scr_charset(0,6)
-	                    scr_charpos(340,306,570,301,451,292)
-	                    obj_player.image_alpha=0
-	                    obj_badguy.image_alpha=0
-	                    obj_lady.image_alpha=0
-	                    obj_lady.drawgirl=false
-	                    for (k=0;k<8;k++) {
-	                        if k%2=0 or k=0 {
-	                            obj_lady.sprite[k]=spr_ladycidleleft
-	                        } else {
-	                            obj_lady.sprite[k]=spr_ladycidleright
-	                        }
-	                    }
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=605 //placeholder
-	                        ygo[playerc]=240
-	                        big[playerc]=400
-	                        xgo[badguyc]=298 //placeholder
-	                        ygo[badguyc]=200
-	                        big[badguyc]=400
-	                        xgo[mainc]=451
-	                        ygo[mainc]=200
-	                        big[mainc]=400
-	                        x=xgo[place]
-	                        y=ygo[place]
-	                        image_xscale=big[place]
-	                    }
-	                    //scr_screenborder(40,0.5);
-	                break;
-	                case 8: //starfire
-	                    song=mus_w4s2
-	                    hideui=true
-	                    mmmmmmm=9999
-	                    //background
-	                    obj_backgroundp1.sprite_index=spr_gunkstage1
-	                    //surface variables
-	                    gunkscreen=-1
-	                    dudescreen=-1
-	                    gunkfreeze=-1
-	                    dudefreeze=-1
-	                    //characters
-	                    scr_charset(0,7)
-	                    scr_charpos(308,306,615,311,451,292)
-	                    //STILL HAVEN'T MADE THAT "SET LADY SPRITES" SCRIPT
-	                    var k;
-	                    for (k=0;k<8;k++) {
-	                        obj_lady.sprite[k]=spr_ladysad
-	                    }
-	                    //camera
-	                    with(obj_camera) {
-	                        xgo[playerc]=605
-	                        ygo[playerc]=240
-	                        big[playerc]=400
-	                        xgo[badguyc]=obj_badguy.x
-	                        ygo[badguyc]=200
-	                        big[badguyc]=400
-	                        xgo[mainc]=451
-	                        ygo[mainc]=200
-	                        big[mainc]=400
-	                        x=xgo[place]
-	                        y=ygo[place]
-	                        image_xscale=big[place]
-	                    }
-	                    //scr_screenborder(60,0.85);
-	                break;
+	        case "channelsurfing & nermal": //channelsurf & nermal
+	            song=mus_channelsurf
+	            ntsc=true
+	            //background
+	            obj_backgroundp1.sprite_index=spr_screensurfingbg
+	            //character
+	            scr_charset(0,-4)
+	            scr_charpos(120,320,pbx,pby,200,lby+10)
+	            obj_lady.sprite_index=spr_cstv
+	            obj_lady.drawgirl=false
+	            //nermal
+	            instance_create(obj_badguy.x-65,obj_badguy.y+5,obj_nermal)
+	            obj_nermal.depth=obj_badguy.depth-1
+	        break;
+	        case "infographic": //infographic
+	            song=mus_frostbytep1
+	            ntsc=true
+	            //background
+	            obj_backgroundp1.sprite_index=spr_georgeback
+	            instance_create(-100,114,obj_georgetrain)
+	            //positioning
+	            obj_player.x=320
+	            obj_player.y=320
+	            obj_badguy.x=64
+	            obj_badguy.y=320
+	            //characters
+	            scr_charset(0,-2)
+	            scr_charpos(64,320,320,320,200,lby+10)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=290
+	                ygo[playerc]=272
+	                big[playerc]=200
+	                xgo[badguyc]=96
+	                ygo[badguyc]=200
+	                big[badguyc]=200
+	                xgo[mainc]=200
+	                ygo[mainc]=200
+	                big[mainc]=400
 	            }
+	            //kill lady (canon)
+	            obj_lady.x=200
+	            obj_lady.y+=10
+	            obj_lady.sprite_index=spr_georgetv
+	            obj_lady.drawgirl=false
+	        break;
+	        case "infographicp2":
+	            //song
+	            skipto=0
+	            song=mus_frostbytep2
+	        break;
+			case "i, robot": //tutorial
+	            song=mus_tutorial
+	            //background
+	            obj_backgroundp1.sprite_index=spr_tutorialback
+	            instance_create(130,189,obj_tutorialguys)
+	            //characters
+	            scr_charset(1,0)
+	            scr_charpos(64,320,300,320,-1,-1)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=290
+	                ygo[playerc]=272
+	                big[playerc]=200
+	                xgo[badguyc]=96
+	                ygo[badguyc]=272
+	                big[badguyc]=200
+	                xgo[mainc]=200
+	                ygo[mainc]=200
+	                big[mainc]=400
+	            }
+	        break;
+	        case "summer": //summer
+	            song=mus_w1s1
+	            //background
+	            obj_backgroundp1.sprite_index=spr_houseback1
+	            obj_backgroundp1.y=87
+	            //character
+	            scr_charset(0,1)
+	            scr_charpos(244,368,578,368,420,343)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=559
+	                ygo[playerc]=260
+	                big[playerc]=400
+	                xgo[badguyc]=260
+	                ygo[badguyc]=260
+	                big[badguyc]=400
+	                xgo[mainc]=420
+	                ygo[mainc]=260
+	                big[mainc]=400
+	                x=xgo[mainc]
+	                y=ygo[mainc]
+	            }
+	        break;
+	        case "stars": //stars
+	            song=mus_w1s2
+	            //background
+	            obj_backgroundp1.sprite_index=spr_houseback1
+	            obj_backgroundp1.y=87
+	            //character
+	            scr_charset(0,1)
+	            scr_charpos(244,368,578,368,420,343)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=559
+	                ygo[playerc]=260
+	                big[playerc]=400
+	                xgo[badguyc]=260
+	                ygo[badguyc]=260
+	                big[badguyc]=400
+	                xgo[mainc]=420
+	                ygo[mainc]=260
+	                big[mainc]=400
+	                x=xgo[mainc]
+	                y=ygo[mainc]
+	            }
+	        break;
+	        case "girl next door": //girl next door
+	            song=mus_w2s1
+	            //background
+	            obj_backgroundp1.sprite_index=spr_busback
+	            //characters
+	            scr_charset(0,2)
+	            scr_charpos(190,303,448,306,313,262)
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=397
+	                ygo[playerc]=219
+	                big[playerc]=400
+	                xgo[badguyc]=213
+	                ygo[badguyc]=201
+	                big[badguyc]=400
+	                xgo[mainc]=308
+	                ygo[mainc]=197
+	                big[mainc]=400
+	                x=xgo[mainc]
+	                y=ygo[mainc]
+	            }
+	            //I never made a script for setting lady's sprites oops
+	            var k;
+	            for (k=0;k<8;k++) {
+	                if k%2=0 or k=0 {
+	                    obj_lady.sprite[k]=spr_ladyidleleftw2
+	                } else {
+	                    obj_lady.sprite[k]=spr_ladyidlerightw2
+	                }
+	            }
+	        break;
+	        case "gamejack": //gamejack
+	            song=mus_w2s2
+	            //background
+	            obj_backgroundp1.sprite_index=spr_busback
+	            //characters
+	            scr_charset(1,0)
+	            scr_charpos(170,303,420,306,313,262)
+	            obj_lady.drawgirl=false
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=397
+	                ygo[playerc]=200
+	                big[playerc]=400
+	                xgo[badguyc]=213
+	                ygo[badguyc]=201
+	                big[badguyc]=400
+	                xgo[mainc]=308
+	                ygo[mainc]=200//197
+	                big[mainc]=400
+	            }
+	        break;
+	        case "twinkle": //twinkle
+	            song=mus_w3s1
+	            weeknd3=true
+	            weeknd3m=0.5
+	            obj_song.mmm=0.6
+	            obj_song.mmmm=0.6
+	            //background
+	            obj_backgroundp1.image_alpha=0
+	            //characters
+	            scr_charset(0,4)
+	            scr_charpos(185,bby,400,pby,276,310)
+	            obj_lady.image_index=spr_speakeroff
+	            //still didn't make that script
+	            var k;
+	            for (k=0;k<8;k++) {
+	                obj_lady.sprite[k]=spr_cdboyidlestill
+	            }
+	            //camera
+	            if obj_stats.downscroll=true {
+	                var pluscamera=35;
+	            } else {
+	                var pluscamera=0;
+	            }
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=358
+	                ygo[playerc]=200+pluscamera
+	                big[playerc]=400
+	                xgo[badguyc]=210//176
+	                ygo[badguyc]=200+pluscamera
+	                big[badguyc]=400
+	                xgo[mainc]=280
+	                ygo[mainc]=200+pluscamera
+	                big[mainc]=400
+	                //set camera pos
+	                x=280
+	                y=200
+	            }
+	            //dude and buddy anime segment
+	            dudeasurf=-1
+	            buddyasurf=-1
+	            //tv screen "id"s
+	            var tv;
+	            for(tv=0;tv<=15;tv++) {
+	                screen[tv,0]="dark"
+	                screen[tv,1]=surface_create(45,45)
+	            }
+	            //dingle
+	            dingle=surface_create(45,45)
+	        break;
+	        case "tsunami": //tsunami
+	            song=mus_w3s2
+	            weeknd3=true
+	            weeknd3m=0
+	            obj_song.mm="nothing"
+	            //characters
+	            scr_charset(0,3) //5
+	            scr_charpos(185,bby,425,pby,276,310)
+	            with(obj_badguy) { cdboy=surface_create(200,200); }
+	            instance_create(obj_player.x-70,obj_player.y-6,obj_nermal)
+	            with(obj_nermal) {
+	                image_xscale=1.125 //I drew buddy too small so this is my admititly lazy fix for that :P
+	                idle[playerc]=spr_buddyidlet
+	                anim[playerc]=spr_buddyleftt
+	                anim[badguyc]=spr_buddydownt
+	                anim[mainc]=spr_buddyupt
+	                anim[3]=spr_buddyrightt
+	                pause=spr_buddypauset
+	            }
+	            obj_lady.image_index=spr_speakeroff        
+	            //camera
+	            if obj_stats.downscroll=true {
+	                var pluscamera=35;
+	            } else {
+	                var pluscamera=0;
+	            }
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=385
+	                ygo[playerc]=225//+pluscamera
+	                big[playerc]=200
+	                xgo[badguyc]=180
+	                ygo[badguyc]=235//+pluscamera
+	                big[badguyc]=200
+	                xgo[mainc]=280
+	                ygo[mainc]=200+pluscamera
+	                big[mainc]=400
+	                //set camera pos
+	                x=280
+	                y=200
+	            }
+	            //tv screen "id"s
+	            var tv;
+	            for(tv=0;tv<=15;tv++) {
+	                screen[tv,0]="colorlight"
+	                screen[tv,1]=0
+	            }
+	        break;
+	        case "satellite": //satellite
+	            song=mus_w4s1
+	            obj_song.event=3
+	            //background
+	            obj_backgroundp1.sprite_index=spr_gunkstage1
+	            //characters
+	            scr_charset(0,6)
+	            scr_charpos(340,306,570,301,451,292)
+	            obj_player.image_alpha=0
+	            obj_badguy.image_alpha=0
+	            obj_lady.image_alpha=0
+	            obj_lady.drawgirl=false
+	            for (k=0;k<8;k++) {
+	                if k%2=0 or k=0 {
+	                    obj_lady.sprite[k]=spr_ladycidleleft
+	                } else {
+	                    obj_lady.sprite[k]=spr_ladycidleright
+	                }
+	            }
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=605 //placeholder
+	                ygo[playerc]=240
+	                big[playerc]=400
+	                xgo[badguyc]=298 //placeholder
+	                ygo[badguyc]=200
+	                big[badguyc]=400
+	                xgo[mainc]=451
+	                ygo[mainc]=200
+	                big[mainc]=400
+	                x=xgo[place]
+	                y=ygo[place]
+	                image_xscale=big[place]
+	            }
+	            //scr_screenborder(40,0.5);
+	        break;
+	        case "starfire": //starfire
+	            song=mus_w4s2
+	            hideui=true
+	            mmmmmmm=9999
+	            //background
+	            obj_backgroundp1.sprite_index=spr_gunkstage1
+	            //surface variables
+	            gunkscreen=-1
+	            dudescreen=-1
+	            gunkfreeze=-1
+	            dudefreeze=-1
+	            //characters
+	            scr_charset(0,7)
+	            scr_charpos(308,306,615,311,451,292)
+	            //STILL HAVEN'T MADE THAT "SET LADY SPRITES" SCRIPT
+	            var k;
+	            for (k=0;k<8;k++) {
+	                obj_lady.sprite[k]=spr_ladysad
+	            }
+	            //camera
+	            with(obj_camera) {
+	                xgo[playerc]=605
+	                ygo[playerc]=240
+	                big[playerc]=400
+	                xgo[badguyc]=obj_badguy.x
+	                ygo[badguyc]=200
+	                big[badguyc]=400
+	                xgo[mainc]=451
+	                ygo[mainc]=200
+	                big[mainc]=400
+	                x=xgo[place]
+	                y=ygo[place]
+	                image_xscale=big[place]
+	            }
+	            //scr_screenborder(60,0.85);
 	        break;
 	    }
 	}

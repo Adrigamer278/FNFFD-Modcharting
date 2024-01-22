@@ -19,7 +19,7 @@ if pause=false {
             case "gunk?": vsound=snd_gunktalk break;
             case "gunk": vsound=snd_gunktalk break;
             case "dan": vsound=snd_dantalk break;
-            case "crowd": vsound=snd_crowd0+irandom(3) break;
+            case "crowd": vsound=asset_get_index("snd_crowd"+string(irandom(3))) break;
             default: vsound=snd_errortalk break;
         }
         //talking

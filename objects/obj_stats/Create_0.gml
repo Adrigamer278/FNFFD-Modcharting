@@ -27,28 +27,88 @@ bind[7]=gp_face2 //left
 //bind[12]=ord("J")
 //bind[13]=ord("K")
 
-//scores
+// parse files ig....
+
 mini=-5 //how far negative the songlist goes
 maxi=9 //how many songs are there
 cat=1 //how many catigories of songs there are
+
+categoriesData = []
+array_push(categoriesData,scr_parseSongList(working_directory));
+
+show_debug_message(categoriesData)
+
+getSongByName = function(name,category) {
+	if category = undefined { category = 0 }
+	return categoriesData[category].songs[array_get_index(categoriesData[category].songsNameIndex,name)]
+}
+
+isSongUnlocked = function(name,category) {
+	if category = undefined { category = 0 }
+	return !getSongByName(name,category)[1].locked
+}
+
+setSongLockState = function(name,state,category) {
+	if category = undefined { category = 0 }
+	getSongByName(name,category)[1].locked = state
+}
+
+hasLockedSongs = function(category,week,ignoreForceLocked) {
+	if week = undefined { week = -1 }
+	if category = undefined { category = 0 }
+	
+	var isSongLocked = false;
+	
+	for (s=0;s<array_length(categoriesData[category].songs);s++) {
+		var songData = categoriesData[category].songs[s]
+		if songData[3][0] = week || week = -1 {
+			isSongLocked = isSongLocked ? isSongLocked : (!(songData[4].disableWeekUnlock & ignoreForceLocked) ? songData[1].locked : true)
+		}
+	}
+	
+	return isSongLocked
+}
+
+unlockWeekLockedSongs = function(category,week) {
+	if week = undefined { week = -1 }
+	if category = undefined { category = 0 }
+	
+	for (s=0;s<array_length(categoriesData[category].songs);s++) {
+		var songData = categoriesData[category].songs[s]
+		if (songData[3][0] = week || week = -1) & !(songData[4].disableWeekUnlock) {
+			if songData[1].locked {
+				songData[1].isNew = true
+			}
+			songData[1].locked = false
+		}
+	}
+}
+
+// do mods here
+// cat = cat +1
+
+//scores
 var s;
 var l;
-for (l=0;l<=cat;l++) {
-    for (s=0;s<(maxi-mini);s++) {
+for (l=0;l<cat;l++) {
+    for (s=0;s<array_length(categoriesData[l].songs);s++) {
+		var wkndData = categoriesData[l].songs[s][2];
         songscore[l,s]=0
         songmiss[l,s]=0
-        songlocked[l,s]=false
+        songlocked[l,s]= wkndData[2] // start locked?
         songnew[l,s]=false
     }
 }
-songlocked[1,0]=true //locking infographic
-songlocked[1,1]=true //locking channelsurfing & nermal
-songlocked[1,2]=true //locking break it down, triangle man
-songlocked[1,3]=true //locking cinemassacre
+
+songgoing = [] // song going to 2.0
+catgoing = 0
+weeksonglist = []
+
 weekgoing=4.2 // song you're going to
 weekndgoing=4 //weeknd you're going to
 typegoing=0 // type of song your playing
 cutgoing=0.2 // cutscene you're going to
+
 joshmode=false
 freeplay=false //are you playing a song in freeplay or storymode
 thunderstonedroprate=2 //your welcome you unthankful fucks

@@ -5,16 +5,16 @@ for(i=0;i<array_length_1d(code);i++) {
         switch(i) {
             case 0:
                 audio_play_sound(snd_unlockall,9999,false)
-                var unlock
-                var unlockc
-                for (unlockc=0;unlockc<=obj_stats.cat;unlockc++) {
-                    for (unlock=0;unlock<(obj_stats.mini*-1)+obj_stats.maxi;unlock++) {
-                        if obj_stats.songlocked[unlockc,unlock]=true {
-                            obj_stats.songnew[unlockc,unlock]=true
-                            obj_stats.songlocked[unlockc,unlock]=false
-                        }
-                    }
-                }
+				
+				for (category=0;category<1;category++) {
+					for(songID=0;songID<array_length(obj_stats.categoriesData[category].songs);songID++) {
+						var songData = obj_stats.categoriesData[category].songs[songID];
+						if !obj_stats.isSongUnlocked(songData[0],category) {
+							songData[1].isNew = true
+						}
+						obj_stats.setSongLockState(songData[0],category,false)
+					}
+				}
                 //clear string
                 string_delete(keys,1,string_length(keys))
                 keyboard_string=""
