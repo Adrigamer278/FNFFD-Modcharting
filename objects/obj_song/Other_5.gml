@@ -10,8 +10,8 @@ if instance_exists(obj_modchart) {
 }
 
 ///clearing song unique surfaces
-if obj_stats.catgoing = 0 {
-	switch(obj_stats.songgoing[0]) {
+if obj_stats.modgoing = 0 {
+	switch(obj_stats.songgoing.name) {
 	    case "twinkle": //twinkle
 	        //tv screens
 	        var v;

@@ -6,13 +6,15 @@ for(i=0;i<array_length_1d(code);i++) {
             case 0:
                 audio_play_sound(snd_unlockall,9999,false)
 				
-				for (category=0;category<1;category++) {
-					for(songID=0;songID<array_length(obj_stats.categoriesData[category].songs);songID++) {
-						var songData = obj_stats.categoriesData[category].songs[songID];
-						if !obj_stats.isSongUnlocked(songData[0],category) {
-							songData[1].isNew = true
+				var maxModsUnlocked = 1; // just main game
+				
+				for (modInd=0;modInd<maxModsUnlocked;modInd++) {
+					for(songID=0;songID<array_length(obj_stats.loadedMods[modInd].songs);songID++) {
+						var songData = obj_stats.loadedMods[modInd].songs[songID];
+						if songData.stats.locked {
+							songData.stats.isNew = true
 						}
-						obj_stats.setSongLockState(songData[0],category,false)
+						songData.stats.locked = false
 					}
 				}
                 //clear string
@@ -35,6 +37,13 @@ for(i=0;i<array_length_1d(code);i++) {
                 string_delete(keys,1,string_length(keys))
                 keyboard_string=""
             break;
+			case 5:
+				audio_stop_all();
+                room_goto(rm_chater)
+				
+				string_delete(keys,1,string_length(keys))
+                keyboard_string=""
+			break;
         }
     }
 }

@@ -7,25 +7,27 @@ if keyboard_check_pressed(vk_down) or gamepad_button_check_pressed(0,gp_padd){
 }
 
 if keyboard_check_pressed(vk_left) or gamepad_button_check_pressed(0,gp_padl){
-    curCat--
+    curMod--
 }
 if keyboard_check_pressed(vk_right) or gamepad_button_check_pressed(0,gp_padr){
-    curCat++
+    curMod++
 }
 
-curCat = clamp(curCat,0,array_length(obj_stats.categoriesData)-1)
-sel=clamp(sel,0,array_length(obj_stats.categoriesData[curCat].songs)-1)
+curMod = clamp(curMod,0,array_length(obj_stats.loadedMods)-1)
+var selMod = obj_stats.loadedMods[curMod];
+
+sel=clamp(sel,0,array_length(selMod.fpSongs)-1)
 //select
 if keyboard_check_pressed(ord("Z")) or keyboard_check_pressed(vk_enter) or gamepad_button_check_pressed(0,gp_face1) {
-    var curSong = obj_stats.categoriesData[curCat].songs[sel]
+    var curSong = selMod.fpSongs[sel]
 	if !instance_exists(obj_fadeout) {
 		
-		if curSong[1].locked {
+		if curSong.stats.locked {
 			audio_play_sound(snd_failure2,999,false)
 			return;
 		}
 		
-		if curSong[4].misplaced {
+		if curSong.misplaced {
 			randomize();
             var randomalarm=round(random(3))
 			if randomalarm = 0 { randomalarm = "" }
@@ -34,11 +36,11 @@ if keyboard_check_pressed(ord("Z")) or keyboard_check_pressed(vk_enter) or gamep
             audio_play_sound( asset_get_index("snd_yoloalarm"+ string(randomalarm)),999,false)
 		}
 		
-		if curSong[4].blockEnter {
+		if curSong.noEnter {
 			return;
 		}
 		
-		obj_stats.catgoing = curCat;
+		obj_stats.modgoing = curMod;
 		obj_stats.songgoing = curSong;
 
 		//bleg

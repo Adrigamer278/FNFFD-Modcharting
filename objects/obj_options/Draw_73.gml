@@ -31,7 +31,7 @@ if mappingkeys = true {
 //changing skins
 if changingskin = true {
     //actually changing
-    obj_stats.skin=clamp(obj_stats.skin,0,18)
+    obj_stats.skin=clamp(obj_stats.skin,0,19)
     if keyboard_check_pressed(vk_left) {
         obj_stats.skin--
     }
@@ -69,6 +69,7 @@ if changingskin = true {
         case 15: skinname = "smart guy" break;
         case 16: skinname = "epic alien" break;
         case 17: skinname = "moon" break;
+		case 19: skinname = "rainbow dude" break;
         default: skinname = "? ? ?" break;
     }
     draw_text_color((room_width/2)+1,91,string_hash_to_newline(string("< ")+string(skinname)+string(" >")),c_black,c_black,c_black,c_black,1)

@@ -1,0 +1,120 @@
+[
+  {
+    "wknd": 0,
+
+    "name": "TUTORIAL",
+    "songs": [
+      "i, robot"
+    ],
+
+    "difficulty": "easy",
+    "assets": [
+      {
+	      "spr": "spr_levelpre",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "wknd": 1,
+
+    "songs": [
+      "summer",
+      "stars"
+    ],
+    "unlocks": [
+      "infographic"
+    ],
+    
+    "difficulty": "easy",
+    "assets": [
+      {
+        "frame": 1,
+        "spr": "spr_levelpre"
+      }
+    ]
+  },
+  {
+    "wknd": 2,
+
+    "songs": [
+      "girl next door",
+      "gamejack"
+    ],
+    "unlocks": [
+      "channelsurfing & nermal"
+    ],
+
+    "difficulty": "normal",
+    "assets": [
+      {
+        "spr": "spr_levelpre",
+        "frame": 2
+      },
+      {
+        "spr": "spr_levelprew2",
+        "frame": 0       
+      }
+    ],
+
+    "songList": [
+      "girl next door",
+      "gameboy"
+    ],
+    
+    "beatChanges": {
+      "assets": [
+        {
+          "spr": "spr_levelpre",
+          "frame": 2
+        },
+        {
+          "spr": "spr_levelprew2",
+          "frame": 1
+        }
+      ],
+      "songList": [
+        "girl next door",
+        "gamejack"
+      ]
+    }
+  },
+  {
+    "wknd": 3,
+
+    "songs": [
+      "twinkle",
+      "tsunami"
+    ],
+    "unlocks": [
+      "break it down triangle man"
+    ],
+
+    "difficulty": "normal",
+    "assets": [
+      {
+        "spr": "spr_levelpre",
+        "frame": 3
+      }
+    ]    
+  },
+  {
+    "wknd": 4,
+    
+    "songs": [
+      "satellite",
+      "starfire"
+    ],
+    "unlocks": [
+      "cinemassacre"
+    ],
+
+    "difficulty": "hard",
+    "assets": [
+      {
+        "spr": "spr_levelpre",
+        "frame": 4
+      }
+    ]
+  }
+]

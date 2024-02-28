@@ -1,0 +1,173 @@
+[
+  {
+    "name": "rainbow",
+    "song": "mus_rainbowtylenol",
+    "chart": "songs/mus_rainbowtylenol.swows",
+    
+    "hide": true,
+    
+    "freeplayIcon": {
+        "spr": "spr_freeplayicons",
+        "frame": 11
+    }
+  },
+  {
+    "name": "misplaced",
+    
+    "misplaced": true,
+    "noEnter": true,
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 0
+    }
+  },
+  {
+    "name": "cinemassacre",
+    "song": "mus_cinemassacre",
+    "chart": "songs/mus_cinemassacre.swows",
+    
+    "locked": true,
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 1
+    }
+  },
+  {
+    "name": "break it down triangle man",
+    "song": "mus_breakitdown",
+    "chart": "songs/mus_breakitdown.swows",
+
+    "displayName": "break it down, triangle man!",
+    
+    "locked": true,
+
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 2
+    }
+  },
+  {
+    "name": "channelsurfing & nermal",
+    "song": "mus_channelsurf",
+    "chart": "songs/mus_channelsurf.swows",
+
+    "locked": true,
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 3
+    }
+  },
+  {
+    "name": "infographic",
+    "song": "mus_frostbytep1",
+    "chart": "songs/mus_frostbytep1.swows",
+
+    "locked": true,
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 4
+    }
+  },
+  {
+    "name": "i, robot",
+    "song": "mus_tutorial",
+    "chart": "songs/mus_tutorial.swows",
+
+    "selected": true,
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 5
+    }
+  },
+  {
+    "name": "summer",
+    "song": "mus_w1s1",
+    "chart": "songs/mus_w1s1.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 6
+    }
+  },
+  {
+    "name": "stars",
+    "song": "mus_w1s2",
+    "chart": "songs/mus_w1s2.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 6
+    }
+  },
+  {
+    "name": "girl next door",
+    "song": "mus_w2s1",
+    "chart": "songs/mus_w2s1.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 7
+    }
+  },
+  {
+    "name": "gamejack",
+    "song": "mus_w2s2",
+    "chart": "songs/mus_w2s2.swows",
+
+    "displayName": "gameboy",
+
+    "beatChanges": {
+        "displayName": "gamejack"
+    },
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 8
+    }
+  },
+  {
+    "name": "twinkle",
+    "song": "mus_w3s1",
+    "chart": "songs/mus_w3s1.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 9
+    }
+  },
+  {
+    "name": "tsunami",
+    "song": "mus_w3s2",
+    "chart": "songs/mus_w3s2.swows",
+   
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 9
+    }
+  },
+  {
+    "name": "satellite",
+    "song": "mus_w4s1",
+    "chart": "songs/mus_w4s1.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 10
+    }
+  },
+  {
+    "name": "starfire",
+    "song": "mus_w4s2",
+    "chart": "songs/mus_w4s2.swows",
+    
+    "freeplayIcon": {
+      "spr": "spr_freeplayicons",
+      "frame": 10
+    }
+  }
+]

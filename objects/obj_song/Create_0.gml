@@ -63,7 +63,6 @@ allEvents=ds_list_create()
 
 notespeed=3
 notes=4
-songpos=0
 songplaying=0
 paused=false
 //points
@@ -87,11 +86,14 @@ squigliness_invert_value=1
 mcdonalds=false
 lol=window_get_x();
 lol2=window_get_y();
+
 alarm[0]=20
 alarm[1]=50
 alarm[2]=80
 alarm[3]=110
 alarm[4]=150
+
+songpos = -150/100
 spacey=48
 surfaceh=true
 //trippy vars
@@ -102,7 +104,8 @@ wavedude=false
 sel=0
 event=0
 saved=false
-scr_songint(obj_stats.songgoing[0],obj_stats.catgoing);
+
+scr_songint(obj_stats.songgoing.name,obj_stats.modgoing);
 
 crochet = (60 / bpm);
 stepCrochet = crochet/4;

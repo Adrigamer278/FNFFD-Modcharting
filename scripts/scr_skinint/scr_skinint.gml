@@ -1,5 +1,6 @@
 function scr_skinint(argument0) {
 	with(obj_stats) {
+		skinrainbow=false
 	    switch(argument0) {
 	        default: //default
 	            colorhat=$8D97C2
@@ -176,6 +177,10 @@ function scr_skinint(argument0) {
 	            colorstripe=$B24A5C
 	            colorpants=$615792
 	            colorshoes=$C05064
+			break;
+			case 19: // rainbow dude
+				scr_skinint(0); // default
+				skinrainbow=true;
 	        break;
 	    }
 	}

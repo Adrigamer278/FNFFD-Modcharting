@@ -2,12 +2,11 @@
 /// @param songtype
 /// @param song
 
-function scr_songint(songname, category) {
-	
-	if category = undefined { category = 0}
+function scr_songint(songname, modNum) {
+	if modNum = undefined { modNum = 0}
 	
 	//setting stage
-	if obj_stats.joshmode=false && category = 0 {
+	if obj_stats.joshmode=false && modNum = 0 && !obj_song.wasStreaming { // dont setup twice				
 	    switch(songname) {
 			case "cinemassacre": //cinemassacre
 	            song=mus_cinemassacre
@@ -398,8 +397,23 @@ function scr_songint(songname, category) {
 	        break;
 	    }
 	}
-	//load song
 	
+	file = undefined; // im being hold hostage unless i name this variable without the var
+	
+	var songData = array_contains(obj_stats.loadedMods[modNum].songsName,songname) ? obj_stats.getSongByName(songname,modNum) : undefined
+	
+	if songData != undefined {
+		if file_exists(songData.chart) {
+			filename = songData.chart;
+			file = file_text_open_read(filename);
+		}
+		
+		if !(songData.song<=-1) { // valid song
+			song = songData.song
+		}
+	}
+	
+	//load song
 	var songLength = audio_sound_length(obj_song.song);
 	
 	if songLength <= 1 && (!(os_browser == browser_not_a_browser) || os_type == os_operagx) {
@@ -408,15 +422,32 @@ function scr_songint(songname, category) {
 	
 	fileExt = ".swows"
 	
-	var searchFile = function() {
-		filename=(string(working_directory)+string("songs\\")+string(audio_get_name(song))+string(fileExt))
-		if file_exists(filename) { file = file_text_open_read(filename) }
+	if !file {
+		//legacy chart system (songs/mus_name.swows)
+		//also json in case anyone retros out and wants legacy style
+		
+	
+		var searchFile = function() {
+			filename=(string(working_directory)+string("songs\\")+string(audio_get_name(song))+string(fileExt))
+			if file_exists(filename) { file = file_text_open_read(filename) }
+		}
+	
+		searchFile();
+	
+		if !file_exists(filename) { fileExt = ".json"; searchFile() }
+	} else {
+		fileExt = string_ends_with(filename,".swows") ? ".swows" : ".json";
 	}
 	
-	searchFile();
-	
-	if !file_exists(filename) { fileExt = ".json"; searchFile() }
-	if !file { return action_message("Song chart not found!") }
+	if !file {
+		
+		// dont crash
+		if os_type = os_windows & os_browser = browser_not_a_browser {
+			action_message("Song chart not found!");
+		}
+		
+		return show_debug_message("Song chart not found!");
+	}
 	
 	var strumLine=ds_list_create()	
 	var allNotes=[]
@@ -491,7 +522,7 @@ function scr_songint(songname, category) {
 		}	
 	}
 	else if fileExt = ".json" {
-		var parsedSong=scr_jsonImport(filename, json_parse)
+		var parsedSong=scr_jsonparse(filename)
 		var songData=parsedSong.song
 		
 		obj_song.song=song
@@ -663,13 +694,14 @@ function scr_songint(songname, category) {
 				
 					var noteNum = 6;
 				
-					dingus = instance_create(apartg+((noteNum-obj_song.notes)*spacex) + funnySpace,posFromStrum,obj_note)
+					dingus = instance_create(234+(44*(noteNum-4)),posFromStrum,obj_note)
 			        dingus.note = noteNum
+					dingus.solid=false
 					
-					if eventName = "Event" {
-						dingus.type = 10
-					} else if eventName = "Hey!" {
+					if eventName = "Hey!" {
 						dingus.type = 7
+					} else {
+						dingus.type = 10; // defualt event
 					}
 					
 					array_push(allNotes,dingus);
@@ -684,6 +716,7 @@ function scr_songint(songname, category) {
 			}
 		}
 	}
+	
 	if (file) { file_text_close(file) };
 	
 	array_foreach(allNotes,function(note) {instance_deactivate_object(note)})
@@ -706,6 +739,10 @@ function scr_songint(songname, category) {
 			alpha:1,
 			angle:0,
 			incomingAngle:0,
+			scale:{
+				x:1,
+				y:1,
+			}
 		});
 	}
 	

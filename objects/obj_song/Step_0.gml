@@ -25,10 +25,11 @@ if ((keyboard_check_pressed(ord("Z")) xor keyboard_check_pressed(vk_enter) xor g
     }
 }
 if paused=false {
+
 //countdown
-    if image_alpha>0{
-        image_alpha-=0.05
-    }
+if image_alpha>0{
+	image_alpha-=0.05
+}
 
 songpos=audio_sound_get_track_position(songplaying)
 songlength = audio_sound_length(songplaying)
@@ -39,8 +40,8 @@ if songlength <= 1 && (!(os_browser == browser_not_a_browser) || os_type == os_o
 	songlength = 100; // seems like audio files are streamed instead of preloaded, so wait for them to load
 } else {
 	if wasStreaming {
+		scr_songint(obj_stats.songgoing.name,obj_stats.modgoing);
 		wasStreaming = false
-		scr_songint(obj_stats.songgoing[0],obj_stats.catgoing);
 	}
 }
 
@@ -162,25 +163,28 @@ if window_has_focus() {
 //end song
     if songpos>=(songlength-0.1) {
         //scoreing
+		
+		var songStats = obj_stats.songgoing.stats
+		
         if saved=false {
             //im going to redo all of this when I remake all these menus and
             //this is going to be so much better
-            if coolscore>obj_stats.songgoing[1].score {
-                obj_stats.songgoing[1].score=coolscore
+            if coolscore>songStats.score {
+                songStats.score=coolscore
             }
 			
-			if misses<obj_stats.songgoing[1].misses || !obj_stats.songgoing[1].beat {
-                obj_stats.songgoing[1].misses=misses
+			if misses<songStats.misses || !songStats.beat {
+                songStats.misses=misses
             }
 			
-			obj_stats.songgoing[1].beat = true;
-			obj_stats.songgoing[1].timesPlayed += 1;
-			obj_stats.songgoing[1].isNew = false;
+			songStats.beat = true;
+			songStats.timesPlayed += 1;
+			songStats.isNew = false;
 			
 			saved=true
 			scr_saveoptions();
         }
-		obj_stats.songgoing[1].isNew = false;
+		songStats.isNew = false;
         obj_stats.skipped=false
         //where to go
         if obj_stats.freeplay = false {

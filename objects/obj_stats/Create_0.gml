@@ -8,7 +8,7 @@ skin=0
 volume=1
 //delta time
 globalvar deltatime;
-deltatime=room_speed/1000000*delta_time;
+deltatime=delta_time / 1000000 * room_speed;
 //4 key
 bind[0]=37 //right
 bind[1]=40 //up
@@ -29,84 +29,77 @@ bind[7]=gp_face2 //left
 
 // parse files ig....
 
-mini=-5 //how far negative the songlist goes
-maxi=9 //how many songs are there
-cat=1 //how many catigories of songs there are
+loadedMods = [];
+array_push(loadedMods,scr_loadmod(working_directory));
 
-categoriesData = []
-array_push(categoriesData,scr_parseSongList(working_directory));
+// LOAD MODS!!!
 
-show_debug_message(categoriesData)
-
-getSongByName = function(name,category) {
-	if category = undefined { category = 0 }
-	return categoriesData[category].songs[array_get_index(categoriesData[category].songsNameIndex,name)]
+var curFolder = file_find_first(working_directory + "mods/*", fa_directory);
+while(curFolder != "") {
+	var modDir = working_directory+"mods/"+curFolder;
+	if file_exists(modDir+"/songs.json") {
+		show_debug_message("Adding mod from folder: "+curFolder)
+		array_push(loadedMods,scr_loadmod(modDir));
+	}
+	curFolder = file_find_next();
 }
 
-isSongUnlocked = function(name,category) {
-	if category = undefined { category = 0 }
-	return !getSongByName(name,category)[1].locked
+getSongByName = function(name,modInd) {
+	if modInd = undefined { modInd = 0 }
+	return loadedMods[modInd].songs[array_get_index(loadedMods[modInd].songsName,name)]
 }
 
-setSongLockState = function(name,state,category) {
-	if category = undefined { category = 0 }
-	getSongByName(name,category)[1].locked = state
+getWknd = function(wkndId,modInd) {
+	if modInd = undefined { modInd = 0 }
+	return loadedMods[modInd].weeknds[array_get_index(loadedMods[modInd].weekndsId,wkndId)]
 }
 
-hasLockedSongs = function(category,week,ignoreForceLocked) {
-	if week = undefined { week = -1 }
-	if category = undefined { category = 0 }
+isSongUnlocked = function(name,modInd) {
+	return !isSongLocked(name,modInd); //lmao
+}
+
+isSongLocked = function(name,modInd) {
+	if modInd = undefined { modInd = 0 }
+	return getSongByName(name,modInd).stats.locked
+}
+
+setSongLockState = function(name,state,modInd) {
+	if modInd = undefined { modInd = 0 }
+	getSongByName(name,modInd).stats.locked = state
+}
+
+hasLockedSongs = function(week,modInd) {
+	if modInd = undefined { modInd = 0 }
 	
 	var isSongLocked = false;
 	
-	for (s=0;s<array_length(categoriesData[category].songs);s++) {
-		var songData = categoriesData[category].songs[s]
-		if songData[3][0] = week || week = -1 {
-			isSongLocked = isSongLocked ? isSongLocked : (!(songData[4].disableWeekUnlock & ignoreForceLocked) ? songData[1].locked : true)
-		}
+	var wknd = getWknd(week,modInd);
+	
+	for (s=0;s<array_length(wknd.unlocks);s++) {
+		var songData = getSongByName(wknd.unlocks[s],modInd)
+		isSongLocked = isSongLocked ? isSongLocked : songData.stats.locked
 	}
 	
 	return isSongLocked
 }
 
-unlockWeekLockedSongs = function(category,week) {
-	if week = undefined { week = -1 }
-	if category = undefined { category = 0 }
-	
-	for (s=0;s<array_length(categoriesData[category].songs);s++) {
-		var songData = categoriesData[category].songs[s]
-		if (songData[3][0] = week || week = -1) & !(songData[4].disableWeekUnlock) {
-			if songData[1].locked {
-				songData[1].isNew = true
-			}
-			songData[1].locked = false
-		}
+unlockWeekSongs = function(week,modInd) {
+	if modInd = undefined { modInd = 0 }
+
+	var wknd = getWknd(week,modInd);
+	for (s=0;s<array_length(wknd.unlocks);s++) {
+		var songData = getSongByName(wknd.unlocks[s],modInd)
+		songData.stats.locked = false;
 	}
 }
 
-// do mods here
-// cat = cat +1
-
-//scores
-var s;
-var l;
-for (l=0;l<cat;l++) {
-    for (s=0;s<array_length(categoriesData[l].songs);s++) {
-		var wkndData = categoriesData[l].songs[s][2];
-        songscore[l,s]=0
-        songmiss[l,s]=0
-        songlocked[l,s]= wkndData[2] // start locked?
-        songnew[l,s]=false
-    }
-}
-
 songgoing = [] // song going to 2.0
-catgoing = 0
-weeksonglist = []
+modgoing = 0 // mod lol
+weeksonglist = [] // the week list
 
 weekgoing=4.2 // song you're going to
 weekndgoing=4 //weeknd you're going to
-typegoing=0 // type of song your playing
+typegoing=0 // type of song your playing (UNUSED RN)
 cutgoing=0.2 // cutscene you're going to
 
 joshmode=false
@@ -145,5 +138,7 @@ colorshirt=$D7799C
 colorstripe=$653662
 colorpants=$5F5492
 colorshoes=$353344
+skinrainbow=false
+
 scr_skinint(skin)
 

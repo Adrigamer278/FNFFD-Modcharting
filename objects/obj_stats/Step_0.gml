@@ -12,7 +12,8 @@ if keyboard_check_pressed(ord(1)) {
 }
 volume=clamp(volume,0,1)
 //deltatime
-deltatime=room_speed/1000000*delta_time
+deltatime=delta_time / 1000000 * room_speed
+
 //weird noise
 if keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter) {
     audio_play_sound(snd_weirdnoise,9999,false)

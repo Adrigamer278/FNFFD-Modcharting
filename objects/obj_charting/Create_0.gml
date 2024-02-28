@@ -1,3 +1,13 @@
+surface_resize(application_surface, 1280, 720)
+window_set_size(1280, 720)
+window_center()
+
+loadSong = function(song) {
+	
+}
+
+loadSong(obj_stats.getSongByName("i, robot",0)) // default
+
 bpm=95
 song=mus_tutorial
 notespeed=1
@@ -6,6 +16,7 @@ notes=4
 songlong=round(((audio_sound_length(song) / 60)*bpm*4))
 songpos=-1
 songplaying=0 //I wanted to make this a var
+songspeed=1
 //notes
 var b;
 var bb;

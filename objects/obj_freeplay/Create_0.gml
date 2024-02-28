@@ -1,6 +1,6 @@
 soap=0
-curCat = 0
-sel= obj_stats.categoriesData[curCat].selection
+curMod = 0;
+sel= obj_stats.loadedMods[curMod].fpSel
 
 /*scr_fpadd("misplaced",0)
 scr_fpadd("cinemassacre",1)

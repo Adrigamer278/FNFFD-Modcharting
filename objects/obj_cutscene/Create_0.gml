@@ -19,9 +19,15 @@ switch(obj_stats.cutgoing-obj_stats.weekndgoing) {
         var count=1;
     break;
 }
-var asset=string(obj_stats.weekndgoing)+string("s")+string(song)+string("dialog")+string(count);
-var cutbox=asset_get_index(string("obj_w")+asset)
-sprite_draw=asset_get_index(string("spr_w")+asset)
+
+var cutbox = -1
+
+if obj_stats.modgoing = 0 {
+	var asset=string(obj_stats.weekndgoing)+string("s")+string(song)+string("dialog")+string(count);
+	cutbox=asset_get_index(string("obj_w")+asset)
+	sprite_draw=asset_get_index(string("spr_w")+asset)
+}
+
 //do the stuff
 if fadein instance_create(0,0,obj_fadein);
 

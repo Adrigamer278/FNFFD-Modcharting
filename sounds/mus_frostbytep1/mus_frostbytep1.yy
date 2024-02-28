@@ -10,7 +10,7 @@
   "bitRate": 192,
   "compression": 3,
   "conversionMode": 0,
-  "duration": 0.0,
+  "duration": 74.27603,
   "parent": {
     "name": "bonus songs",
     "path": "folders/Sonidos/songs/playsongs/bonus songs.yy",

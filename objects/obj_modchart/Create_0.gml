@@ -28,12 +28,30 @@ getEaseFunc = function(string) {
 		case "inoutback": return EaseInOutBack;
 		case "outback": return EaseOutBack;
 		case "inback": return EaseInBack;
+		case "backinout": return EaseInOutBack;
+		case "backout": return EaseOutBack;
+		case "backin": return EaseInBack;
 		
 		case "inoutquad": return EaseInOutQuad;
 		case "outquad": return EaseOutQuad;
 		case "inquad": return EaseInQuad;
+		case "quadinout": return EaseInOutQuad;
+		case "quadout": return EaseOutQuad;
+		case "quadin": return EaseInQuad;
+		
+		case "inoutsine": return EaseInOutSine;
+		case "outsine": return EaseOutSine;
+		case "insine": return EaseInSine;
+		case "sineinout": return EaseInOutSine;
+		case "sineout": return EaseOutSine;
+		case "sinein": return EaseInSine;
+		
 		default: return EaseLinear;
 	}
+}
+
+tweenProperty = function(struct,property,value = 0,time = 0,easingStyle = "linear") {
+	TweenFire(struct,getEaseFunc(easingStyle),"once",true,0,time,property,variable_struct_get(struct,property),value)
 }
 
 // tweening the notes to a position
@@ -93,6 +111,10 @@ noteTweenOffsetY = function(noteNum = 0,pos = 0,time = 0,easingStyle = "linear")
 }
 
 // modifiers tween
+
+modifierTweenValue = function(modifier,pos = 0,time = 0,easingStyle = "linear") {
+	TweenFire(modifier,getEaseFunc(easingStyle),"once",true,0,time,"value",modifier.value,pos)
+}
 
 modifierTweenX = function(modifier,pos = 0,time = 0,easingStyle = "linear") {
 	TweenFire(modifier,getEaseFunc(easingStyle),"once",true,0,time,"x",modifier.x,pos)
@@ -207,7 +229,7 @@ onBeatTill = function(beatStart,beatEnd,func) {
 drunk = {
 	x: 0,
 	y: 0,
-	z: 2,
+	z: 0,
 }
 
 drunkSpeed = {
@@ -216,9 +238,27 @@ drunkSpeed = {
 	z: 1,
 }
 
+tipsy = {
+	x: 0,
+	y: 0,
+	z: 0,
+}
+
+tipsySpeed = {
+	x: 1,
+	y: 1,
+	z: 1,
+}
+
 reverse = {
 	x: 0,
 	y: 0,
+}
+
+strumlineRotate = {
+	x: 0,
+	y: 0,
+	z: 90,
 }
 
 // functions / start of variables define
@@ -230,6 +270,8 @@ screenHeight = 200;
 
 xArrowSize = 44;
 yArrowSize = 48;
+avgArrowSize = (xArrowSize+yArrowSize)/2;
+
 strumsXDiff = obj_song.strums[|obj_song.notes].defaultX - obj_song.strums[|0].defaultX;
 strumsYDiff = 352 - 48; // downscrollpos-upscrollpos
 
@@ -305,6 +347,26 @@ calculatePerspective = function(startX,startY,z) {
 	return [xPerspective,yPerspective,zPerspectiveOffset]
 }
 
+quaternionEuler = function(roll, pitch, yaw) {
+	roll = degtorad(roll);
+	pitch = degtorad(pitch);
+	yaw = degtorad(yaw)
+	
+	var cr = cos(roll);
+    var sr = sin(roll);
+    var cp = cos(pitch);
+    var sp = sin(pitch);
+    var cy = cos(yaw);
+    var sy = sin(yaw);
+    
+    var q = {x: 0, y: 0, z: 0, w:0 };
+    q.w = cr * cp * cy + sr * sp * sy;
+    q.x = sr * cp * cy - cr * sp * sy;
+    q.y = cr * sp * cy + sr * cp * sy;
+    q.z = cr * cp * sy - sr * sp * cy;
+    return q;
+}
+
 runModifiers = function(obj,curPos) {
 	if !obj { show_debug_message("NO OBJ!!") };
 	
@@ -349,6 +411,8 @@ runModifiers = function(obj,curPos) {
 		offsetAngle += strumOffsets.angle
 		offsetAlpha *= strumOffsets.alpha
 		offsetIncoming += strumOffsets.incomingAngle
+		scale.x *= strumOffsets.scale.x
+		scale.y *= strumOffsets.scale.y
 	}
 	
 	// DRUNK
@@ -364,7 +428,23 @@ runModifiers = function(obj,curPos) {
 	
 	if !disableZ && drunk.z!=0 {
 		var drunkOffZ = drunk.z * (cos(((songPosition) + ((num)*0.2) + (curPos*0.45)*(10/screenHeight)) * (drunkSpeed.z*0.2)) * xArrowSize*0.5);
-		offsetZ+=drunkOffZ / 200;
+		offsetZ+=drunkOffZ / 100;
+	}
+	
+	// TIPSY
+	if tipsy.x != 0 {
+		var tipsyOffX = tipsy.x * (cos((songPosition *(1.2) + (num)*(2.0)) * (5) * tipsySpeed.x*0.2 ) * xArrowSize*0.4);
+		offsetX+=tipsyOffX;
+	}
+	
+	if tipsy.y != 0 {
+		var tipsyOffY = tipsy.y * (cos((songPosition *(1.2) + (num)*(2.0)) * (5) * tipsySpeed.y*0.2 ) * xArrowSize*0.4);
+		offsetY+=tipsyOffY;
+	}
+	
+	if !disableZ && tipsy.z!=0 {
+		var tipsyOffZ =	tipsy.z * (cos((songPosition *(1.2) + (num)*(2.0)) * (5) * tipsySpeed.z*0.2 ) * xArrowSize*0.4);
+		offsetZ+=tipsyOffZ / 100;
 	}
 	
 	// REVERSE
@@ -377,6 +457,26 @@ runModifiers = function(obj,curPos) {
 		var reverseY = strumsYDiff * reverse.y * flip;
 		multDist*= (1-(reverse.y*2))
 		offsetY+=reverseY;
+	}
+	
+	if (strumlineRotate.x!=0 || strumlineRotate.y!=0 || strumlineRotate.z!=90) {
+		var laneShit = obj.note%obj_song.notes;
+	    var offsetThing = 0.5;
+	    var halfKeyCount = obj_song.notes/2;
+	    if (obj.note < halfKeyCount)
+	    {
+	        offsetThing = -0.5;
+	        laneShit = obj.note+1;
+	    }
+		
+	    var distFromCenter = ((laneShit)-halfKeyCount)+offsetThing; //theres probably an easier way of doing this
+	    offsetX += -distFromCenter*xArrowSize;
+
+	    var upscroll = !obj_stats.downscroll;
+	    var q = quaternionEuler(strumlineRotate.z, strumlineRotate.x, (upscroll ? -strumlineRotate.y : strumlineRotate.y));
+	    offsetX += q.x * distFromCenter*xArrowSize;
+	    offsetY += q.y * distFromCenter*yArrowSize;
+		offsetZ += q.z * distFromCenter*avgArrowSize / 100;
 	}
 	
 	// post modifiers
@@ -415,7 +515,6 @@ onCreate = function() {
 				var crochet = obj_song.crochet
 				var moveAmmo = 5;
 				for (i=0; i<(obj_song.notes*2); i++) {
-					show_debug_message(i);
 					setNoteOffsetX(i, (beat%2 == 0 ? moveAmmo : -moveAmmo))
 					noteTweenOffsetX(i , 0, crochet, "quadout")
 
@@ -428,6 +527,54 @@ onCreate = function() {
 			})
 		break;
 		
+		case mus_w3s2:
+			var startBeat = 48;			
+			for (i=0; i<(obj_song.notes*2); i++) {
+				onEvenBeatTill(startBeat,8*2+48,function() {
+					var crochet = obj_song.crochet
+					
+					drunk.x = beat%4==0 ? 2 : -2;
+					drunk.y = beat%4==0 ? 3 : -4;
+					drunk.z = beat%4==0 ? 1 : -1;
+					modifierTweenX(drunk,0,crochet,"quadout")
+					modifierTweenY(drunk,0,crochet,"quadout")
+					modifierTweenZ(drunk,0,crochet,"quadout")
+					
+					tipsy.x = beat%4==0 ? 2 : -2;
+					modifierTweenX(tipsy,0,crochet,"quadout")
+					
+					strumlineRotate.z = beat%4==0 ? 100 : -80;
+					strumlineRotate.y = beat%4==0 ? 20 : -20;
+					strumlineRotate.x = beat%4==0 ? 20 : -20;
+					modifierTweenZ(strumlineRotate,90,crochet,"quadout")
+					modifierTweenY(strumlineRotate,0,crochet,"quadout")
+					modifierTweenX(strumlineRotate,0,crochet,"quadout")
+					
+					for (i=0; i<(obj_song.notes*2); i++) {
+						var strData = getStrumOffsetStruct(i);
+						strData.scale.x=0.8;
+						tweenProperty(strData.scale,"x",1,crochet,"quadout")
+						
+						if ((i%2==0 && !(beat%4==0)) || (beat%4==0 && !(i%2==0))) {
+							strData.y=beat%4==0 ? -50 : 50;
+							strData.z=beat%4==0 ? -5 : 5;
+							strData.angle=random_range(-20,20);
+							
+							tweenProperty(strData,"y",0,crochet,"sineout")
+							tweenProperty(strData,"z",1,crochet,"sineout")
+							tweenProperty(strData,"angle",0,crochet,"sineout")
+						}
+					}
+				})
+				
+				onEvenBeatTill(65,65 + 2*(7*6-3),function() {
+					var crochet = obj_song.crochet
+					
+					tipsy.y = beat%4==0 ? 1 : -1;
+					modifierTweenY(tipsy,0,crochet,"quadout")
+				})	
+			}
+		break;
 		default:
 		break;
 	}

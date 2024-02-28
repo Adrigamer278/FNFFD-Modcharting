@@ -1,0 +1,11 @@
+[
+  {
+    "name": "lobotomy",
+    "song": "audios/lobotomy.ogg",
+    "chart": "charts/lobotomy.json",
+    
+    "freeplayIcon": {
+        "spr": "images/normalblevel.png",
+    }
+  }
+]

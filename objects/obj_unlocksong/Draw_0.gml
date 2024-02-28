@@ -1,4 +1,4 @@
-switch(obj_stats.catgoing) {
+switch(obj_stats.modgoing) {
 	case 0:
 		switch(obj_stats.weekndgoing) {
 		    case 1: //infographic

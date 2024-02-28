@@ -3,8 +3,8 @@
 //ever wonder why your game isn't running great? it's probably this!
 //audio_sound_pitch(songplaying,1.5)
 
-if obj_stats.catgoing = 0 { // default songs
-	switch(obj_stats.songgoing[0]) {
+if obj_stats.modgoing = 0 { // default songs
+	switch(obj_stats.songgoing.name) {
 		 case "cinemassacre": //cinemassacre
 	        switch(event) {
 	            case "techdiff":
@@ -293,10 +293,10 @@ if obj_stats.catgoing = 0 { // default songs
 	        var slickvisor=make_color_rgb(162,238,188)
 	        var slickears=make_color_rgb(123,186,193)
 	        //nermal bombs
-	        if instance_exists(obj_note) {
-	            obj_note.bombhit=false
-	            if obj_note.type=3 {
-	                obj_note.bombsprite=spr_bombsn
+	        with(obj_note) {
+	            bombhit=false
+	            if type=3 {
+	                bombsprite=spr_bombsn
 	            }
 	        }
 	        //tint math

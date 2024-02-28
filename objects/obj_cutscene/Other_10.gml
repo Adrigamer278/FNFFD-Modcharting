@@ -1,12 +1,12 @@
 
 if (array_length(obj_stats.weeksonglist) = obj_stats.weekgoing)
 {
-	var disWeekData = obj_stats.categoriesData[obj_stats.catgoing].weeks[obj_stats.weekndgoing]
+	var weekData = obj_stats.loadedMods[obj_stats.modgoing].weeknds[obj_stats.weekndgoing]
 	
-	disWeekData.beat = true;
-	disWeekData.timesPlayed += 1;
+	weekData.beat = true;
+	weekData.timesPlayed += 1;
 	
-    if (obj_stats.hasLockedSongs(obj_stats.catgoing,obj_stats.weekndgoing,true))
+    if (obj_stats.hasLockedSongs(obj_stats.weekndgoing,obj_stats.modgoing))
     {
         instance_create(0, 0, obj_unlocksong)
         instance_destroy()
@@ -17,7 +17,7 @@ if (array_length(obj_stats.weeksonglist) = obj_stats.weekgoing)
         obj_fadeout.roomgo = 5
         audio_play_sound(mus_menu, 9999, true)
 		
-		obj_stats.unlockWeekLockedSongs(obj_stats.catgoing,obj_stats.weekndgoing)
+		obj_stats.unlockWeekSongs(obj_stats.weekndgoing,obj_stats.modgoing)
     }
 }
 else
@@ -28,7 +28,7 @@ else
 	
 	var nextSongName = array_length(obj_stats.weeksonglist) >= obj_stats.weekgoing ? obj_stats.weeksonglist[obj_stats.weekgoing-1] : "i, robot"
 	
-	obj_stats.songgoing = obj_stats.getSongByName(nextSongName,obj_stats.catgoing)
+	obj_stats.songgoing = obj_stats.getSongByName(nextSongName,obj_stats.modgoing)
 }
 
 

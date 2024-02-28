@@ -3,7 +3,7 @@ alarm[0]=50
 started=false
 squigliness_invert_value=1
 
-obj_stats.unlockWeekLockedSongs(obj_stats.catgoing,obj_stats.weekndgoing)
+obj_stats.unlockWeekSongs(obj_stats.weekndgoing,obj_stats.modgoing)
 //dan song frames
 var s;
 for(s=0;s<4;s++) {

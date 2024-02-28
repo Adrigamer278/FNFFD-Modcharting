@@ -13,17 +13,20 @@ if keyboard_check_pressed(vk_enter) {
     }
 }
 if songpos>-1 {
-//moving through song
-if keyboard_check_pressed(vk_left) {
-    songpos-=audio_sound_length(songplaying)/songlong
-    audio_sound_set_track_position(songplaying,songpos)
-}
-if keyboard_check_pressed(vk_right) {
-    songpos+=audio_sound_length(songplaying)/songlong
-    audio_sound_set_track_position(songplaying,songpos)
-}
-//MAAATH
     songpos=audio_sound_get_track_position(songplaying)
+
+	//moving through song
+	if keyboard_check_pressed(vk_left) {
+	    songpos-=audio_sound_length(songplaying)/songlong
+	    audio_sound_set_track_position(songplaying,songpos)
+	}
+	if keyboard_check_pressed(vk_right) {
+	    songpos+=audio_sound_length(songplaying)/songlong
+	    audio_sound_set_track_position(songplaying,songpos)
+	}
+	
+	audio_sound_pitch(songplaying, songspeed)
+	//MAAATH
     y=-(songpos/60*bpm*4)*16
 }
 //saving

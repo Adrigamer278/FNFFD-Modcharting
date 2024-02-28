@@ -1,0 +1,12 @@
+[
+  {
+    "name": "rainbow",
+    "song": "songs/rainbow/mus_rainbowtylenol.ogg",
+    "chart": "songs/rainbow/mus_rainbowtylenol.swows",
+    
+    "freeplayIcon": {
+        "spr": "spr_freeplayicons",
+        "frame": 11
+    }
+  }
+]

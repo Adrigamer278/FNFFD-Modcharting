@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_optionsSaving",
+  "name": "scr_optionssaving",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
