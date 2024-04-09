@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_processcmdargs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_processcmdargs",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

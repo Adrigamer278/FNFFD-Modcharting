@@ -139,9 +139,11 @@ void main()
 				pixelColor = mix(pixelColor,vec4(rainbow,1.0),(1.0-isPartColor)-rainbowAmmo);	
 			}
 		}
-	
+		
 		pixelColor.a *= alphaMult;
 	}
+	
+	//pixelColor.a *= clamp(sTime/(v_vPosition.y/10.0)*5.0,0.0,1.0);
     
     gl_FragColor = pixelColor;
 }

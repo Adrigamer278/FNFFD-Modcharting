@@ -1725,7 +1725,7 @@ function TGMX_TweenProcess(_t, _time, _d, _target)
 	switch(_d[0]) // Property Count
 	{
 	case 1:
-		if (is_method(_t[TGMX_T_EASE]))
+		if (is_callable(_t[TGMX_T_EASE]))
 		{
 			_d[1](_t[TGMX_T_EASE](_time, _d[2], _d[3], _t[TGMX_T_DURATION], _t), _target, _d[4], _t);
 		}

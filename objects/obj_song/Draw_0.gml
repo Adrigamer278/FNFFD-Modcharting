@@ -34,7 +34,7 @@ if obj_stats.modgoing = 0 { // default songs
 	                    draw_sprite(spr_danbgdoor,0,0,0)
 	                    //slick and nermal
 	                    if obj_song.mmmm>=112 && obj_song.mmmm<400 {
-	                        obj_song.mmmm+=0.4
+	                        obj_song.mmmm+=0.4*deltaMult
 	                        draw_sprite(spr_snback,current_time/200,round(obj_song.mmmm),222)
 	                    }
 	                    draw_sprite(sprite_index,image_index,x,y)
@@ -56,7 +56,7 @@ if obj_stats.modgoing = 0 { // default songs
 	                            if obj_song.paused=false {
 	                                //walking math
 	                                if x<212 {
-	                                    x+=xhuh/(room_speed*(12*(60/obj_song.bpm)))
+	                                    x+=xhuh/(room_speed*(12*(60/obj_song.bpm)))*deltaMult
 	                                } else {
 	                                    phase="idle"
 	                                }
@@ -72,7 +72,7 @@ if obj_stats.modgoing = 0 { // default songs
 	                            draw_sprite_ext(sprite_index,picture,x,y,1,1,0,c_white,1)
 	                            draw_sprite_ext(spr_nnidk,0,x,y,1,1,0,c_white,1)
 	                            draw_sprite_ext(spr_dukeidk,0,x+sprite_width,y,1,1,0,c_white,1)
-	                            waittime+=12/1000000*delta_time //why is this accurate to the animation frame rate? idk
+	                            waittime+=12/1000000*deltaMult //why is this accurate to the animation frame rate? idk
 	                            if waittime>=36 {
 	                                phase="seeya"
 	                            }
@@ -2802,7 +2802,7 @@ if obj_stats.modgoing = 0 { // default songs
 	        with(obj_lady) {
 	            image_alpha=0
 	            drawgirl=false
-	            var sadsin=round(sin(current_time/400)*4)
+	            var sadsin=round(sin(current_time/400* obj_song.songRate)*4) 
 	            draw_sprite(sprite_index,image_index,x,y)
 	            draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,coolcolor1,0.25)
 	            draw_sprite_ext(sprite_index,image_index,x,y+4,1,1,0,c_black,0.5)
@@ -2860,7 +2860,7 @@ if obj_stats.modgoing = 0 { // default songs
 	            case 1: //real world intro
 	                //scrolling
 	                if paused=false {
-	                    mm+=0.05*bobby
+	                    mm+=0.05*bobby*deltaMult
 	                }
 	                //sky
 	                var l;
@@ -2882,7 +2882,7 @@ if obj_stats.modgoing = 0 { // default songs
 	                draw_sprite_ext(spr_gunkfb,mmm,obj_camera.x+mm+(bobby*8),obj_camera.y+8,2,2,0,c_black,0.5)
 	                //SCARY DUDE!
 	                if mmmm!=0 {
-	                    mmmm+=0.045
+	                    mmmm+=0.045*deltaMult
 	                    mmmmm=1-(exp(mmmm-4))
 	                }
 	                scr_shadercheck(sh_silhouette,make_color_rgb(31,30,40))
@@ -2896,35 +2896,35 @@ if obj_stats.modgoing = 0 { // default songs
 	            case 2: //rest of intro
 	                //scrolling
 	                if paused=false {
-	                    mm+=0.05*bobby
+	                    mm+=0.05*bobby*deltaMult
 	                }
 	                draw_sprite_ext(spr_gunkfbb,mmmmmm,obj_camera.x+(mm*-1),obj_camera.y,2,2,0,c_white,1)
 	                draw_sprite_ext(spr_gunkfb,mmm,obj_camera.x+mm,obj_camera.y,2,2,0,c_white,1)
 	            break;
 	            case 3: //final part
 	                if mmmm>=0.01 {
-	                    mmmm+=0.007
+	                    mmmm+=0.007*deltaMult
 	                    mmmmm=(exp(mmmm))-1
 	                }
 	                draw_sprite_ext(spr_gunkfb,mmm,obj_camera.x,obj_camera.y,2,2,0,c_white,1)
 	                draw_sprite_ext(spr_gunkfb,mmm+1,obj_camera.x,obj_camera.y,2,2,0,c_white,mmmmm)
 	            break;
 	            case 22:
-	                waveint+=((mm*2)-waveint)/50
+	                waveint+=((mm*2)-waveint)/50*deltaMult
 	                if mmm>0 {
-	                    mmm+=(1-mmm)/40
+	                    mmm+=(1-mmm)/40*deltaMult
 	                }
-	                mmmmm+=(mmmm-mmmmm)/50
+	                mmmmm+=(mmmm-mmmmm)/50*deltaMult
 	                draw_sprite_ext(spr_whitepixel,0,0,0,room_width,room_height,0,c_black,waveint/4)
 	                draw_sprite_ext(spr_scaryeyes,0,(obj_player.x+50),obj_player.y,1,1,0,c_white,mmm)
 	            break;
 	            case "boobies":
-	                mm+=0.5
+	                mm+=0.5*deltaMult
 	                if mm>=200 {
 	                    mm=0
 	                }
-	                mmm+=(mmmm-mmm)/30
-	                mmmmm+=(mmmmmm-mmmmm)/30
+	                mmm+=(mmmm-mmm)/30*deltaMult
+	                mmmmm+=(mmmmmm-mmmmm)/30*deltaMult
 	                if !surface_exists(gunkscreen) {
 	                    gunkscreen=surface_create(400,400)
 	                } else {

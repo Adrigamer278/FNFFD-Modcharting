@@ -462,7 +462,8 @@ function scr_noteevent(argument0, argument1) {
 	                    scr_songint("infographicp2",0); //load part 2
 	                    obj_badguy.everybeat=1
 	                    songplaying=audio_play_sound(mus_frostbytep2,9999,false) //lpay new song
-	                }
+						audio_sound_pitch(songplaying,obj_song.songRate)
+					}
 	                //camera reset
 	                with(obj_camera) {
 	                    place=2
@@ -482,10 +483,6 @@ function scr_noteevent(argument0, argument1) {
 	    case mus_frostbytep2:
 	        switch event {
 	            case 1:
-	                //bpm
-	                instance_destroy(obj_midi_clock)
-	                instance_create(0,0,obj_midi_clock) //reset beat clock
-	                obj_midi_clock.bpm=obj_song.bpm
 	                //set fump's notes to fump notes
 	                obj_song.baddieicon=spr_fump
 	                with(obj_uinotes) {

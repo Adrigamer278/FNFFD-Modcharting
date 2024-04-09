@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_tweening",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_tweening",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

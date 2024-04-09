@@ -46,8 +46,12 @@ getEaseFunc = function(string) {
 		case "sineout": return EaseOutSine;
 		case "sinein": return EaseInSine;
 		
+		case "circout": return EaseOutCirc;
+		
 		default: return EaseLinear;
 	}
+	
+	return EaseLinear;
 }
 
 tweenProperty = function(struct,property,value = 0,time = 0,easingStyle = "linear") {
@@ -57,7 +61,7 @@ tweenProperty = function(struct,property,value = 0,time = 0,easingStyle = "linea
 // tweening the notes to a position
 noteTweenX = function(noteNum = 0,pos = 0,time = 0,easingStyle = "linear") {
 	var offsets = getStrumOffsetStruct(noteNum)
-	var strum = ds_list_find_value(obj_song.strums, noteNum)
+	var strum = array_get(obj_song.strums, noteNum)
 	
 	var off = 0;
 	if instance_exists(strum) {
@@ -71,7 +75,7 @@ noteTweenX = function(noteNum = 0,pos = 0,time = 0,easingStyle = "linear") {
 
 noteTweenY = function(noteNum = 0,pos = 0,time = 0,easingStyle = "linear") {
 	var offsets = getStrumOffsetStruct(noteNum)
-	var strum = ds_list_find_value(obj_song.strums, noteNum)
+	var strum = array_get(obj_song.strums, noteNum)
 	
 	var off = 0;
 	if instance_exists(strum) {
@@ -143,7 +147,7 @@ setNoteOffsetY = function(noteNum,pos) {
 
 setNoteX = function(noteNum,pos) {
 	var offsets = getStrumOffsetStruct(noteNum)
-	var strum = ds_list_find_value(obj_song.strums, noteNum)
+	var strum = array_get(obj_song.strums, noteNum)
 	
 	var off = 0;
 	if instance_exists(strum) {
@@ -157,7 +161,7 @@ setNoteX = function(noteNum,pos) {
 
 setNoteY = function(noteNum,pos) {
 	var offsets = getStrumOffsetStruct(noteNum)
-	var strum = ds_list_find_value(obj_song.strums, noteNum)
+	var strum = array_get(obj_song.strums, noteNum)
 	
 	var off = 0;
 	if instance_exists(strum) {
@@ -181,7 +185,7 @@ setNoteOffsetAngle = function(noteNum,pos) {
 
 setNoteOffsetDirection = function(noteNum,pos) {
 	var offsets = getStrumOffsetStruct(noteNum)
-	offsets.incomingDirection = pos
+	offsets.incomingAngle = pos
 }
 
 // beat and steps system
@@ -232,6 +236,14 @@ drunk = {
 	z: 0,
 }
 
+boomerang = {y:0}
+
+drunkNotes = {
+	x: 0,
+	y: 0,
+	z: 0,
+}
+
 drunkSpeed = {
 	x: 1,
 	y: 1,
@@ -261,6 +273,11 @@ strumlineRotate = {
 	z: 90,
 }
 
+camHUD = {
+	x: 0,
+	y: 0,
+}
+
 // functions / start of variables define
 
 getStrumOffsetStruct = function(note) { return variable_struct_get(self,"strum"+string(note)) }
@@ -272,7 +289,7 @@ xArrowSize = 44;
 yArrowSize = 48;
 avgArrowSize = (xArrowSize+yArrowSize)/2;
 
-strumsXDiff = obj_song.strums[|obj_song.notes].defaultX - obj_song.strums[|0].defaultX;
+strumsXDiff = obj_song.strums[obj_song.notes].defaultX - obj_song.strums[0].defaultX;
 strumsYDiff = 352 - 48; // downscrollpos-upscrollpos
 
 zNear = 0
@@ -375,7 +392,7 @@ runModifiers = function(obj,curPos) {
 	var songPosition = obj_song.songpos;
 	var flip = obj_stats.downscroll ? -1 : 1;
 	
-	var strum = ds_list_find_value(obj_song.strums, obj.note)
+	var strum = array_get(obj_song.strums, obj.note)
 	var strumOffsets = variable_struct_get(self,"strum"+string(obj.note));
 	var num = obj.note%obj_song.notes;
 	
@@ -415,6 +432,14 @@ runModifiers = function(obj,curPos) {
 		scale.y *= strumOffsets.scale.y
 	}
 	
+	if boomerang.y!=0 {
+		multDist *= 0.75;
+		curPos*= 1.25;
+		
+		offsetY += (sin(curPos/-700) * 400 + (curPos/3.5)) * (-boomerang.y);
+        offsetAlpha *= clamp(1-(curPos/-600-3.5), 0, 1);
+	}
+	
 	// DRUNK
 	if drunk.x != 0 {
 		var drunkOffX = drunk.x * (cos(((songPosition) + ((num)*0.2) + (curPos*0.45)*(10/screenHeight)) * (drunkSpeed.x*0.2)) * xArrowSize*0.5);
@@ -428,6 +453,22 @@ runModifiers = function(obj,curPos) {
 	
 	if !disableZ && drunk.z!=0 {
 		var drunkOffZ = drunk.z * (cos(((songPosition) + ((num)*0.2) + (curPos*0.45)*(10/screenHeight)) * (drunkSpeed.z*0.2)) * xArrowSize*0.5);
+		offsetZ+=drunkOffZ / 100;
+	}
+	
+	// DRUNK NOTES
+	if drunkNotes.x != 0 {
+		var drunkOffX = drunkNotes.x/5 * (sin(((songPosition / 100) + ((num)*0.02) + (10/screenHeight)) * (curPos*0.45) * (drunkSpeed.x*0.2)) * xArrowSize*0.5);
+		offsetX+=drunkOffX;
+	}
+	
+	if drunkNotes.y != 0 {
+		var drunkOffY = drunkNotes.y/5 * (sin(((songPosition / 100) + ((num)*0.02) + (10/screenHeight)) * (curPos*0.45) * (drunkSpeed.y*0.2)) * yArrowSize*0.5);
+		offsetY+=drunkOffY;
+	}
+	
+	if !disableZ && drunkNotes.z!=0 {
+		var drunkOffZ = drunkNotes.z/5 * (sin(((songPosition / 100) + ((num)*0.02) + (10/screenHeight)) * (curPos*0.45) * (drunkSpeed.z*0.2)) * xArrowSize*0.5);
 		offsetZ+=drunkOffZ / 100;
 	}
 	
@@ -458,6 +499,9 @@ runModifiers = function(obj,curPos) {
 		multDist*= (1-(reverse.y*2))
 		offsetY+=reverseY;
 	}
+	
+	offsetX+=camHUD.x;
+	offsetY+=camHUD.y;
 	
 	if (strumlineRotate.x!=0 || strumlineRotate.y!=0 || strumlineRotate.z!=90) {
 		var laneShit = obj.note%obj_song.notes;
@@ -493,8 +537,20 @@ runModifiers = function(obj,curPos) {
 	}
 };
 
+kabooming = false;
+kaboomIntensity = 3;
+
 stepHit = function(curStep) {
 	// do code here
+	
+	if kabooming {
+		var stepCrochet = obj_song.stepCrochet;
+		 if curStep % 4 == 0 {
+			 modifierTweenY(camHUD,-6*kaboomIntensity,stepCrochet*2,"circOut")
+		 } else if curStep % 4 == 2 {
+			 modifierTweenY(camHUD,0,stepCrochet*2,"sineIn")
+		 }
+	}
 	
 	// internal
 	_step(curStep);
@@ -506,25 +562,391 @@ beatHit = function(curBeat) {
 	_beat(curBeat);
 };
 
-onUpdate = function() {};
+isStartLerp = false;
+stupidSin = false;
+stupidCos = false;
+connectionStarting = false;
+connectionTerminated = false;
+satelliteWin = undefined;
+satnoteSizeX = 1;
+satnoteSizeY = 1;
+start = 0;
+wow = 0;
+weirdComing = 0;
 
-onCreate = function() {
+flipWindow = true;
+
+flxVel = false;
+allVel = 0;
+
+onUpdate = function() {
+	if chimpgameModifier {
+		for (i=0;i<array_length(chimpWindows);i++) {
+			var win = chimpWindows[i]
+			win.setPosition(lerp(win.x,win.endX,deltaMult*0.02),lerp(win.y,win.endY,deltaMult*0.02)) 
+		}
+	}
+	
 	switch(obj_song.song) {
 		case mus_w4s1:
-			onBeatTill(10,189,function() {
+		
+			satnoteSizeX = lerp(satnoteSizeX,1,5*(1/60)*deltaMult);
+			satnoteSizeY = lerp(satnoteSizeY,1,5*(1/60)*deltaMult);
+		
+			var songPos = obj_song.songpos*1000
+			if isStartLerp {
+				for (i=0; i<(obj_song.notes*2); i++) { 
+					var cur = getStrumOffsetStruct(i)
+					setNoteOffsetX(i,lerp(cur.x,0,deltaMult*.008))
+					setNoteOffsetY(i,lerp(cur.y,0,deltaMult*.01))
+				}
+			}
+			
+			if stupidSin {
+				for (i=0; i<(obj_song.notes*2); i++) { 
+					var weirdOff = i+(clamp((i-1), 1, 9)) * 1.2
+					setNoteOffsetY(i,0.5*(sin(((songPos-start) / 1000 * 1.3) + weirdOff) * ((15*(i*40.5392+9)) % 20.5)))
+				}
+			}
+			
+			if stupidCos {
+				for (i=0; i<(obj_song.notes*2); i++) { 
+					var weirdOff = i * 1.2 + i/2
+					setNoteOffsetX(i,0.5*(cos(((songPos-start) / 1000 * 1.3) + weirdOff) * ((115*(i*46.5392+9)) % 32.5)))
+				}
+			}
+			
+			if flxVel {
+				allVel-= 10*(1/60)*deltaMult
+				for (i=0; i<(obj_song.notes*2); i++) { 
+					var off = getStrumOffsetStruct(i)
+					off.y-=allVel
+				}
+			}
+			
+			for (i=0; i<(obj_song.notes*2); i++) {
+				var offs = getStrumOffsetStruct(i)
+				offs.scale.x = satnoteSizeX;
+				offs.scale.y = satnoteSizeY;
+			}
+			
+			var win = satelliteWin;
+			var thisWin = global.thisWindow;
+			
+			if connectionStarting {
+				var twspeed = deltaMult*0.025
+				thisWin.setSize(lerp(window_get_width(),500,twspeed),lerp(window_get_height(),500,twspeed))
+				if flipWindow {
+					thisWin.setPosition((display_get_width()-window_get_width())/2,lerp(window_get_y(),display_get_height() -window_get_height() - 50,twspeed))
+				} else {
+					thisWin.setPosition((display_get_width()-window_get_width())/2,lerp(window_get_y(),50,twspeed))
+				}
+				
+				win.setPosition(win.x,lerp(win.y,win.endY,twspeed)) 
+			}
+			
+			if connectionTerminated {
+				var twspeed = deltaMult*0.05
+				thisWin.setSize(lerp(window_get_width(),800,twspeed),lerp(window_get_height(),800,twspeed))
+				thisWin.setPosition((display_get_width()-window_get_width())/2,lerp(window_get_y(),(display_get_height()-window_get_height())/2,twspeed))
+				
+				if flipWindow {
+					win.setPosition(win.x,lerp(win.y,-450,twspeed))
+				} else {
+					win.setPosition(win.x,lerp(win.y,display_get_height() + 50,twspeed)) 
+				}
+			}
+		break;
+	}
+};
+
+chimpgameModifier = false
+chimpWindows = []
+onCreate = function() {
+	
+	if chimpgameModifier {
+		for (i=0;i<4;i++) { // create 4 chimpgames
+			var window = scr_makewindow();
+			window.makeWin(["-chimpgame"]);
+			
+			var defX = (display_get_width()-400)/2
+			var defY = (display_get_height()-400)/2
+			
+			var xPos = i>1 ? defX + window_get_width()/2 + 300 : defX - 300 - 400
+			var yPos = i%2==0 ? defY - defY/1.5 : defY + defY/1.5
+			window.endX = xPos; window.endY = yPos
+			window.setPosition(defX,defY)
+			window.setBorder(false)
+			window.setSize(400,400)
+			
+			array_push(chimpWindows,window)
+		}
+	}
+	
+	switch(obj_song.song) {
+		case mus_w4s1:
+			satelliteWin = scr_makewindow();
+			satelliteWin.makeWin(["-satellite"]);
+			satelliteWin.setSize(400,400)
+			//satelliteWin.setBorder(false)
+			satelliteWin.setTitle("shh nothing")
+			satelliteWin.setPosition((display_get_width()-400)/2,flipWindow ? -400-50 : display_get_height() + 50)
+			
+			satelliteWin.endY = display_get_height() - 400 - 100 // -windowSize -offset
+			
+			if flipWindow {
+				satelliteWin.endY = 50;
+			}
+		
+			isStartLerp = true;
+			for (i=0; i<(obj_song.notes*2); i++) {
+				setNoteOffsetX(i, (i>3 ? 4000+screenWidth : -4000))
+				setNoteOffsetY(i, -1000)
+			}
+			
+			addBeatEvent(32,function(){
+				isStartLerp = false;
+			})
+			
+			addBeatEvent(112,function(){
+				stupidCos = true;
+			})
+			
+			addBeatEvent(160,function(){
+				stupidCos = false;
+			})
+			
+			addBeatEvent(223,function(){
+				connectionStarting = true;
+				
+				//SATELLITES ARE IN THE SKY!!! NOT BELOW YOUR WINDOW!!
+				if obj_stats.downscroll!=flipWindow {
+					modifierTweenY(boomerang,-.75,obj_song.crochet*2,"quadout")
+				}
+			})
+			
+			addBeatEvent(224,function(){
+				stupidSin = true;
+				modifierTweenX(reverse,.5,obj_song.crochet*2,"quadout")
+				
 				var crochet = obj_song.crochet
-				var moveAmmo = 5;
+				for (i=0; i<(obj_song.notes); i++) {
+					noteTweenAlpha(i,0.5,crochet,"quadout")
+				}
+			})
+			
+			addBeatEvent(287,function(){
+				connectionStarting = false;
+				connectionTerminated = true;
+				
+				modifierTweenY(boomerang,0,obj_song.crochet,"quadout")
+				
+				var crochet = obj_song.crochet
+				for (i=0; i<(obj_song.notes); i++) {
+					noteTweenAlpha(i,1,crochet,"quadout")
+				}
+			})
+			
+			addBeatEvent(291,function(){
+				connectionTerminated = false;
+			})
+			
+			addStepEvent(63*4+1,function(){
+				
+				var stepCrochet = obj_song.stepCrochet;
+				var time = stepCrochet*4
+				
+				noteTweenOffsetY(7 ,0, time, "sineIn")
+				satnoteSizeX = satnoteSizeX + 0.5
+				satnoteSizeY = satnoteSizeY - 0.25
+			})
+
+	        addStepEvent(63*4+2,function(){
+	            satnoteSizeX = satnoteSizeX - 0.25
+	            satnoteSizeY = satnoteSizeY + 0.5
+			})
+			
+			addBeatEvent(64,function(){
+				var stepCrochet = obj_song.stepCrochet;
+				for (i=0; i<4; i++) {
+					noteTweenOffsetX(i,-1000,stepCrochet+ i*0.2, "sineIn")
+				}
+				for (i=7; i>3; i--) {
+					noteTweenOffsetX(i,1000,stepCrochet+ (3-(i-4))*0.2, "sineIn")
+				}
+			})
+			
+			onStepTill(32*4,64*4,function(step){
+	            if !(step%2==0) { return }
+				var stepCrochet = obj_song.stepCrochet;
+				
+	            var bare = wow%8;
+	            var strum = floor(bare)%8;
+
+	            var time = stepCrochet*4
+
+	            if (bare==strum) && (step!=64*4) {
+					setNoteOffsetAngle(strum,0)
+					noteTweenOffsetY(strum,-30,time,"circOut")
+	                noteTweenAngle(strum , 360, time, "circOut")
+				}
+
+	            wow = wow + 0.5
+
+	            strum = strum -1
+	            if strum==-1 { strum = 7 }
+	            noteTweenOffsetY(strum ,0, time, "sineIn")
+			})
+
+	        addBeatEvent(94,function(){
+				var stepCrochet = obj_song.stepCrochet;
+				for (i=0; i<4; i++) {
+					noteTweenOffsetX(i,0,stepCrochet+ 0.1 + (3-i)*0.2, "circOut")
+				}
+				for (i=7; i>3; i--) {
+					noteTweenOffsetX(i,0,stepCrochet+ 0.1 + (i-4)*0.2, "circOut")
+				}
+			})
+			
+			addBeatEvent(288,function(){
+				stupidSin = false;
+				
+				satnoteSizeX = 1.4;
+				satnoteSizeY = 0.7;
+				modifierTweenX(reverse,0,obj_song.crochet,"quadout")
+			})
+			
+			var increase = function() {
+				satnoteSizeX=satnoteSizeX+0.1;
+				satnoteSizeY=satnoteSizeY+0.1;
+			}
+			
+			addBeatEvent(296,increase);
+	        addBeatEvent(304,increase);
+	        addBeatEvent(316,increase);
+	        addBeatEvent(328,increase);
+	        addBeatEvent(332,increase);
+	        addBeatEvent(336,increase);
+	        addBeatEvent(344,increase);
+	        addBeatEvent(348,increase);
+			
+			onStepTill(1275,1280,function(step){
+				var stepCrochet = obj_song.stepCrochet;
+				
+				weirdComing += 0.05;
+				reverse.x = weirdComing;
+				modifierTweenX(reverse,weirdComing-0.025,stepCrochet,"quadout")
+				
+				satnoteSizeX=satnoteSizeX+0.15;
+				satnoteSizeY=satnoteSizeY+0.15;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					setNoteOffsetAngle(i,step%2==0 ? -90 : 90)
+				}
+			})
+			
+			onStepTill(763,767,function(step){
+	            satnoteSizeX=satnoteSizeX+0.15;
+	            satnoteSizeY=satnoteSizeY+0.15;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					setNoteOffsetAngle(i,step%2==0 ? 10 : -10)
+				}
+			})
+			
+			addStepEvent(1280,function() {
+				kabooming = true;
+				
+				var crochet = obj_song.crochet*2
+				modifierTweenX(reverse,0,crochet,"quadout")
+				strumlineRotate.x = 0;
+				modifierTweenX(strumlineRotate,360,crochet,"quadout")
+			})
+			
+			drunkSpeed.x = .15;
+			drunkSpeed.y = .15;
+			drunkSpeed.z = .15;
+			
+			onBeatTill(289,318,function() {
+				var crochet = obj_song.crochet
+				var moveAmmo = 15;
+				drunkNotes.x = 1.5;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					setNoteOffsetX(i, moveAmmo)
+					noteTweenOffsetX(i , 0, crochet, "quadout")
+					
+					setNoteOffsetY(i, (beat%2 == 0 ? moveAmmo : -moveAmmo) * ((i%4)>1 ? -1 : 1))
+					noteTweenOffsetY(i , 0, crochet, "quadout");
+
+					setNoteOffsetAngle(i, (beat%2 == 0 ? 10 : -10) * ((i%4)>1 ? -1 : 1))
+					noteTweenAngle(i , 0, crochet, "quadout");
+				}
+			})
+			
+			onBeatTill(320,1422/4,function() {
+				var crochet = obj_song.crochet
+				var moveAmmo = 15;
+				
+				drunkNotes.z = 1;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					setNoteOffsetX(i, moveAmmo)
+					noteTweenOffsetX(i , 0, crochet, "quadout")
+					
+					setNoteOffsetY(i, (beat%2 == 0 ? moveAmmo : -moveAmmo) * ((i%4)>1 ? -1 : 1))
+					noteTweenOffsetY(i , 0, crochet, "quadout");
+
+					setNoteOffsetAngle(i, (beat%2 == 0 ? 10 : -10) * ((i%4)>1 ? -1 : 1))
+					noteTweenAngle(i , 0, crochet, "quadout");
+					
+					setNoteOffsetDirection(i, (beat%2 == 0 ? 10 : -10) * ((i%4)>1 ? -1 : 1))
+					noteTweenDirection(i , 0, crochet, "quadout")
+					
+					drunkNotes.x = 1.5;
+					modifierTweenX(drunkNotes,0,crochet,"quadout")
+				}
+			})
+		
+			onBeatTill(160,189,function() {
+				var crochet = obj_song.crochet
+				var moveAmmo = 10;
 				for (i=0; i<(obj_song.notes*2); i++) {
 					setNoteOffsetX(i, (beat%2 == 0 ? moveAmmo : -moveAmmo))
 					noteTweenOffsetX(i , 0, crochet, "quadout")
 
-					setNoteOffsetAngle(i, (beat%2 == 0 ? 5 : -5))
+					setNoteOffsetAngle(i, (beat%2 == 0 ? 10 : -10))
 					noteTweenAngle(i , 0, crochet, "quadout");
 
-					setNoteOffsetDirection(i, (beat%2 == 0 ? 5 : -5))
+					setNoteOffsetDirection(i, (beat%2 == 0 ? 10 : -10))
 					noteTweenDirection(i , 0, crochet, "quadout")
 				}
 			})
+			
+			onBeatTill(192,222,function() {
+				var crochet = obj_song.crochet
+				var moveAmmo = 10;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					setNoteOffsetX(i, (beat%2 == 0 ? moveAmmo : -moveAmmo))
+					noteTweenOffsetX(i , 0, crochet, "quadout")
+
+					setNoteOffsetAngle(i, (beat%2 == 0 ? 10 : -10))
+					noteTweenAngle(i , 0, crochet, "quadout");
+
+					setNoteOffsetDirection(i, (beat%2 == 0 ? 10 : -10))
+					noteTweenDirection(i , 0, crochet, "quadout")
+					
+					drunkNotes.y = 1.5;
+					modifierTweenY(drunkNotes,0,crochet,"quadout")
+				}
+			})
+			
+			addStepEvent(1422,function(){
+				var crochet = obj_song.crochet
+				
+				flxVel=true;
+				allVel=3;
+				for (i=0; i<(obj_song.notes*2); i++) {
+					noteTweenAlpha(i,0,crochet*6,"quadout")
+				}
+			})
+			
 		break;
 		
 		case mus_w3s2:
@@ -576,6 +998,7 @@ onCreate = function() {
 			}
 		break;
 		default:
+		
 		break;
 	}
 }
@@ -603,5 +1026,3 @@ _beat = function(beat) { // beats
 		}
 	})
 }
-
-onCreate(); // change to run this on obj_song

@@ -42,6 +42,8 @@ if obj_stats.modgoing = 0 {
 	}
 }
 
+scr_clearwindows();
+
 ///dan
 audio_stop_sound(mus_fumpsbreakfast)
 

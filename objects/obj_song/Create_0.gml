@@ -55,11 +55,14 @@ skipi=0
 //song vars
 bpm=95
 song=mus_tutorial
-wasStreaming = false
+songRate = 1
 
-strums=ds_list_create()	
-allNotes=[]
-allEvents=ds_list_create()
+//game_set_speed(165,gamespeed_fps)
+
+strums=[]
+unspawnNotes=[]
+lastNoteLane = {};
+allEvents=[]
 
 notespeed=3
 notes=4
@@ -87,13 +90,13 @@ mcdonalds=false
 lol=window_get_x();
 lol2=window_get_y();
 
-alarm[0]=20
-alarm[1]=50
-alarm[2]=80
-alarm[3]=110
-alarm[4]=150
+alarm[0]=20 * room_speed/60
+alarm[1]=50 * room_speed/60 
+alarm[2]=80 * room_speed/60
+alarm[3]=110 * room_speed/60
+alarm[4]=150 * room_speed/60
 
-songpos = -150/100
+songpos = -(alarm[4]+2.5)/room_speed * songRate
 spacey=48
 surfaceh=true
 //trippy vars
@@ -105,13 +108,12 @@ sel=0
 event=0
 saved=false
 
-scr_songint(obj_stats.songgoing.name,obj_stats.modgoing);
-
-crochet = (60 / bpm);
-stepCrochet = crochet/4;
-
 curStep = 0;
 curBeat = 0;
+crochet = 0;
+stepCrochet = 0;
+
+scr_songint(obj_stats.songgoing.name,obj_stats.modgoing);
 
 //scr_skipintrosprite(obj_stats.typegoing,obj_stats.weekgoing);
 

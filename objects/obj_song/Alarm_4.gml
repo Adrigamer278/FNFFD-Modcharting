@@ -1,6 +1,7 @@
 instance_create(0,0,obj_midi_clock)
-obj_midi_clock.bpm=bpm
+obj_midi_clock.bpm=bpm*songRate
 songplaying=audio_play_sound(song,9999,false)
+audio_sound_pitch(songplaying,songRate)
 if obj_stats.skipped=true {
     //screen flash (hide the jank)
     instance_create(0,0,obj_fadein)

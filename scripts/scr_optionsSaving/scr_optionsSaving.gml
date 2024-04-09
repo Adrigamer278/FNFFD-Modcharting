@@ -1,4 +1,5 @@
 function scr_saveoptions(){
+	if !global.isMainWindow { return; }
 	if file_exists("scoresandsets.txt") {
 	    file_delete("scoresandsets.txt")
 	}

@@ -1,3 +1,6 @@
+scr_setupwindows()
+scr_processcmdargs()
+
 //debug
 debug=false
 //options
@@ -6,9 +9,6 @@ downscroll=false
 readable=false
 skin=0
 volume=1
-//delta time
-globalvar deltatime;
-deltatime=delta_time / 1000000 * room_speed;
 //4 key
 bind[0]=37 //right
 bind[1]=40 //up
@@ -27,21 +27,26 @@ bind[7]=gp_face2 //left
 //bind[12]=ord("J")
 //bind[13]=ord("K")
 
+globalvar deltaMult;
+deltaMult=1
+
 // parse files ig....
 
 loadedMods = [];
-array_push(loadedMods,scr_loadmod(working_directory));
 
-// LOAD MODS!!!
+if global.isMainWindow {
+	array_push(loadedMods,scr_loadmod(working_directory));
 
-var curFolder = file_find_first(working_directory + "mods/*", fa_directory);
-while(curFolder != "") {
-	var modDir = working_directory+"mods/"+curFolder;
-	if file_exists(modDir+"/songs.json") {
-		show_debug_message("Adding mod from folder: "+curFolder)
-		array_push(loadedMods,scr_loadmod(modDir));
+	// LOAD MODS!!!
+	var curFolder = file_find_first(working_directory + "mods/*", fa_directory);
+	while(curFolder != "") {
+		var modDir = working_directory+"mods/"+curFolder;
+		if file_exists(modDir+"/songs.json") {
+			show_debug_message("Adding mod from folder: "+curFolder)
+			array_push(loadedMods,scr_loadmod(modDir));
+		}
+		curFolder = file_find_next();
 	}
-	curFolder = file_find_next();
 }
 
 getSongByName = function(name,modInd) {
@@ -114,7 +119,7 @@ bluedude=false //if the childish prankster wears a blue shirt
 gndscore=0 //temp score for weeknd 2 cutscene
 suckass=false //you sucked in twinkle
 skipped=false //have you skipped the song you're on
-specialroom=0 //what funny little room will you get
+specialroom = variable_struct_exists(self,"specialroom") ? specialroom : ""
 scr_loadoptions();
 //create lady's font
 globalvar fnt_lady;
@@ -141,4 +146,3 @@ colorshoes=$353344
 skinrainbow=false
 
 scr_skinint(skin)
-

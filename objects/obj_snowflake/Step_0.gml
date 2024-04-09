@@ -1,5 +1,5 @@
-x+=2
-y+=2
+x+=2 * deltaMult
+y+=2 * deltaMult
 if y>room_height {
     instance_destroy();
 }

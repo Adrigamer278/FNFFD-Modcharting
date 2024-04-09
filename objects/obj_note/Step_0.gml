@@ -4,7 +4,7 @@ var positionDiff=obj_song.songpos*1000 - strumTime
 var curPos = (positionDiff*obj_song.notespeed)
 var dist = (0.45 * -curPos);
 if obj_stats.downscroll=true { dist = -dist };
-var strum = ds_list_find_value(obj_song.strums, note);
+var strum = array_get(obj_song.strums, note);
 
 var strumY = undefined;
 var strumX = undefined;
@@ -39,8 +39,7 @@ if instance_exists(obj_modchart) && solid {
 	strumIncoming = offsets.incomingAngle;
 	dist *= offsets.distMult;
 }
-
-var strumIncoming = degtorad(strumIncoming);
+strumIncoming = degtorad(strumIncoming);
 
 var yDist = sin(strumIncoming) * dist;
 var xDist = cos(strumIncoming) * dist;
@@ -72,11 +71,6 @@ var win=2.5
 
 var offScreen=obj_song.songpos >= ((strumTime+166)/1000);
 var reachedHitPos = obj_song.songpos >= (strumTime/1000) && songPosition>0;
-var canBeHit = (obj_song.songpos*1000)-(strumTime)
-
-var hitbox = 166; // ms
-
-canBeHit=(canBeHit < hitbox && canBeHit >-hitbox)
 
 //note goes off screen
 if (offScreen && (type=1 or type=2 or type=8 or type=9) && note >= obj_song.notes) {
@@ -86,34 +80,105 @@ if (offScreen && (type=1 or type=2 or type=8 or type=9) && note >= obj_song.note
 	obj_song.flow-=0.1
 	obj_song.coolscore-=50
 }
-//event
+//events
+if reachedHitPos {
+	switch(type) {
+		case 4:
+            obj_camera.place=playerc
+            instance_destroy();  
+        break;
+        case 5:
+            obj_camera.place=badguyc
+            instance_destroy();  
+        break;
+        case 6:
+            obj_camera.place=mainc
+            instance_destroy();  
+        break;
+		
+		case 7: // ayy
+			var charUsed = (note < obj_song.notes) ? obj_badguy : obj_player
+			charUsed.sprite_index= (obj_song.skill>=75 && variable_struct_exists(charUsed,"yousuck")) ? charUsed.yousuck : charUsed.ayy
+            charUsed.hit[note]=true
+			
+			//dude stuff
+			if charUsed=obj_player {
+				charUsed.press=true
+				charUsed.frame=0
+			}
 
-if type = 10 {
-	if reachedHitPos {
-		scr_noteevent(obj_song.song,event);
-		instance_destroy();
-    }
+            switch(charUsed.sprite_index) {
+				//dude
+				case obj_player.ayy:
+                    audio_play_sound(snd_dudeayy,9999,false)
+                break;
+				case obj_player.yousuck:
+                    audio_play_sound(snd_crap,9999,false)
+                break;
+				
+                case spr_cyanayy:
+                    audio_play_sound(snd_cyanayy,9999,false)
+                break;
+                case spr_buddyayy:
+                    audio_play_sound(snd_buddyayy,9999,false)
+                break;
+                case spr_gunkayy:
+                    audio_play_sound(snd_gunkayy,9999,false)
+                break;
+                case spr_danayy:
+                    audio_play_sound(snd_danayy,9999,false)
+                break;
+            }
+			instance_destroy();
+		break;
+		
+		case 10:
+			scr_noteevent(obj_song.song,event);
+			instance_destroy();
+		break;
+        case 11: //firework pre
+            //audio_play_sound(snd_oh,9999,false)
+            instance_destroy();
+        break;
+        case 12: //firework BOOM
+            if keyboard_check_pressed(obj_stats.bind[2]) xor gamepad_button_check_pressed(0,(obj_stats.bind[6])) {
+                //obj_player.sprite_index=obj_player.anim[2]
+                //obj_player.hit[2]=true
+                //obj_player.frame=0
+                //audio_play_sound(snd_ha,9999,false)
+                //instance_destroy();
+            }
+            instance_destroy();
+        break;
+	}
 }
+
+// if the note is destroyed because of an event then just dont do anims lol
+if !instance_exists(self) { return; }
+
 //hitting notes
 if note < obj_song.notes { //enemy
     if reachedHitPos { //14 
         var butt; //LOL
         var sprite; //less funny
         var chungy; //abit funny
-        switch(type) {
-            case 2:
-                chungy=4
-            break;
-            case 3:
-                chungy=8
-            break;
-            case 9:
-                chungy=4
-            break;
-            default:
-                chungy=0
-            break;
-        }
+		
+		//sprites spacing
+		switch(type) {
+			case 2:
+	            chungy=4
+	        break;
+			case 3:
+	            chungy=8
+	        break;
+	        case 9:
+	            chungy=4
+	        break;
+	        default:
+	            chungy=0
+	        break;
+		}
+		
         switch(type) {
             case 3:
                 if bombhit=true {
@@ -121,24 +186,6 @@ if note < obj_song.notes { //enemy
                     obj_badguy.hit[note]=true
                 } else {
                     scr_bombevent(obj_song.song,note);
-                }
-            break;
-            case 7:
-                obj_badguy.sprite_index=obj_badguy.ayy
-                obj_badguy.hit[note]=true
-                switch(obj_badguy.ayy) {
-                    case spr_cyanayy:
-                        audio_play_sound(snd_cyanayy,9999,false)
-                    break;
-                    case spr_buddyayy:
-                        audio_play_sound(snd_buddyayy,9999,false)
-                    break;
-                    case spr_gunkayy:
-                        audio_play_sound(snd_gunkayy,9999,false)
-                    break;
-                    case spr_danayy:
-                        audio_play_sound(snd_danayy,9999,false)
-                    break;
                 }
             break;
             default:
@@ -157,18 +204,19 @@ if note < obj_song.notes { //enemy
         var butt; //LOL
         var sprite; //less funny
         var chungy; //abit funny
-        //sprites spacing
-        switch(type) {
-            case 2:
-                chungy=4
-            break;
-            case 9:
-                chungy=4
-            break;
-            default:
-                chungy=0
-            break;
-        }
+		//sprites spacing
+		switch(type) {
+			case 2:
+	            chungy=4
+	        break;
+	        case 9:
+	            chungy=4
+	        break;
+	        default:
+	            chungy=0
+	        break;
+		}
+		
         //pressing note
         switch(type) {
             default: //normal note
@@ -206,30 +254,6 @@ if note < obj_song.notes { //enemy
                 }
                 scr_bombevent(obj_song.song,note);
             break;
-            case 4:
-                obj_camera.place=playerc
-                instance_destroy();  
-            break;
-            case 5:
-                obj_camera.place=badguyc
-                instance_destroy();  
-            break;
-            case 6:
-                obj_camera.place=mainc
-                instance_destroy();  
-            break;
-            case 7:
-                obj_player.press=true
-                obj_player.frame=0
-                if obj_song.skill < 75 {
-                    obj_player.sprite_index=obj_player.ayy
-                    audio_play_sound(snd_dudeayy,9999,false)
-                } else {
-                    obj_player.sprite_index=obj_player.yousuck
-                    audio_play_sound(snd_crap,9999,false)
-                }
-                instance_destroy();  
-            break;
             case 8: //hold
             if keyboard_check(obj_stats.bind[note-obj_song.notes]) xor gamepad_button_check(0,(obj_stats.bind[note-obj_song.notes+4])) {
                 obj_player.sprite_index=obj_player.anim[(note-obj_song.notes+chungy)]
@@ -253,20 +277,6 @@ if note < obj_song.notes { //enemy
             case 10: //event
                 //just found out you can time your key press perfectly
                 //and hit an event note and it doesnt do the event lolol
-            break;
-            case 11: //firework pre
-                //audio_play_sound(snd_oh,9999,false)
-                instance_destroy();
-            break;
-            case 12: //firework BOOM
-                if keyboard_check_pressed(obj_stats.bind[2]) xor gamepad_button_check_pressed(0,(obj_stats.bind[6])) {
-                    //obj_player.sprite_index=obj_player.anim[2]
-                    //obj_player.hit[2]=true
-                    //obj_player.frame=0
-                    //audio_play_sound(snd_ha,9999,false)
-                    //instance_destroy();
-                }
-                instance_destroy();
             break;
         }  
     }

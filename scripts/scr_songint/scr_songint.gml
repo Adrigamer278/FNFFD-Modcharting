@@ -6,7 +6,7 @@ function scr_songint(songname, modNum) {
 	if modNum = undefined { modNum = 0}
 	
 	//setting stage
-	if obj_stats.joshmode=false && modNum = 0 && !obj_song.wasStreaming { // dont setup twice				
+	if obj_stats.joshmode=false && modNum = 0 { // dont setup twice				
 	    switch(songname) {
 			case "cinemassacre": //cinemassacre
 	            song=mus_cinemassacre
@@ -413,19 +413,11 @@ function scr_songint(songname, modNum) {
 		}
 	}
 	
-	//load song
-	var songLength = audio_sound_length(obj_song.song);
-	
-	if songLength <= 1 && (!(os_browser == browser_not_a_browser) || os_type == os_operagx) {
-		return
-	}
-	
 	fileExt = ".swows"
 	
 	if !file {
 		//legacy chart system (songs/mus_name.swows)
 		//also json in case anyone retros out and wants legacy style
-		
 	
 		var searchFile = function() {
 			filename=(string(working_directory)+string("songs\\")+string(audio_get_name(song))+string(fileExt))
@@ -449,9 +441,9 @@ function scr_songint(songname, modNum) {
 		return show_debug_message("Song chart not found!");
 	}
 	
-	var strumLine=ds_list_create()	
+	var strumLine=[]
 	var allNotes=[]
-	var allEvents=ds_list_create()
+	var allEvents=[]
 	
 	if fileExt = ".swows" {
 		file_text_readln(file) //skip useless line
@@ -464,7 +456,8 @@ function scr_songint(songname, modNum) {
 		var b; //down
 		var bb; //across
 		
-		var songlong=round(((songLength/60)*obj_song.bpm*4));
+		// YOU CAN NOW LOAD GAMEJACK ON TWINKLE!!! (why)
+		var songlong= round((scr_filelines(filename)-4) / (obj_song.notes*2));
 		var nosp=obj_song.notespeed //notespeed with no identifier
 		//note starting position
 		if obj_stats.downscroll = false {
@@ -485,7 +478,7 @@ function scr_songint(songname, modNum) {
 		    var sucker=instance_create(myx,starty,obj_uinotes);
 		    sucker.note=bb;
 			
-			ds_list_add(strumLine,sucker);
+			array_push(strumLine,sucker);
 		    //note... notes
 		    for (b=0; b<songlong; b++) {
 		        if b=0 {
@@ -515,7 +508,7 @@ function scr_songint(songname, modNum) {
 		                dingus.event=event
 		                event++
 						
-						ds_list_add(allEvents,dingus);
+						array_push(allEvents,dingus);
 		            }
 		        }
 		    }
@@ -538,11 +531,11 @@ function scr_songint(songname, modNum) {
 		var dingus;
 		
 		// camera focus
-		var createCameraChange = function(strumT,dudeCam) {
+		var createCameraChange = function(strumT,dudeCam,allNotes) {
 			var posFromStrum=(strumT/60*obj_song.bpm*4)*(48*obj_song.notespeed)
 			
 			var dingus = instance_create(0,posFromStrum,obj_note)
-		    dingus.note = 1
+		    dingus.note = obj_song.notes*2-1
 			
 			dingus.solid=false
 		    
@@ -570,7 +563,7 @@ function scr_songint(songname, modNum) {
 			strum = instance_create(myx,strumY,obj_uinotes)
 			strum.note=bb
 			
-			ds_list_add(strumLine,strum);
+			array_push(strumLine,strum);
 		}
 			
 		var event=0
@@ -589,9 +582,9 @@ function scr_songint(songname, modNum) {
 				curBPM = sectionBpm;
 			
 				var sectionBeats = (variable_struct_get(sectionData,"sectionBeats") != undefined) ? variable_struct_get(sectionData,"sectionBeats") : 4;
-				strumTime += sectionBeats * (1000 * 60 / curBPM);
+				strumTime += sectionBeats * (1000 * 60 / curBPM) / 1000;
 			
-				createCameraChange(strumTime,sectionData.mustHitSection);
+				createCameraChange(strumTime,sectionData.mustHitSection,allNotes);
 			
 				for (noteIndex=0; noteIndex<array_length(sectionData.sectionNotes); noteIndex++) {
 					var noteData = sectionData.sectionNotes[noteIndex]
@@ -644,7 +637,7 @@ function scr_songint(songname, modNum) {
 			        if dingus.type=10 {
 			            dingus.event=event
 			            event++
-						ds_list_add(allEvents,dingus);
+						array_push(allEvents,dingus);
 					}
 				
 					if Length>0 {
@@ -665,7 +658,7 @@ function scr_songint(songname, modNum) {
 							
 							array_push(allNotes,dingus);
 						
-							if noteType = "Hurt Note" {
+							if noteType = "Hurt Note" || noteType = "magic" || noteType = "police" {
 								dingus.type = 3
 							} else if noteType = "GF Sing" {
 								dingus.type = 9 // sustain buddy
@@ -710,7 +703,7 @@ function scr_songint(songname, modNum) {
 						dingus.event=event
 						event++
 						
-						ds_list_add(allEvents,dingus);
+						array_push(allEvents,dingus);
 					}
 				}
 			}
@@ -725,13 +718,24 @@ function scr_songint(songname, modNum) {
 		return (n1.strumTime >= n2.strumTime) ? 1 : -1
 	})
 	
+	obj_song.crochet = (60 / obj_song.bpm);
+	obj_song.stepCrochet = obj_song.crochet/4;
+	
+	if instance_exists(obj_midi_clock) {
+		instance_destroy(obj_midi_clock)
+		instance_create(0,0,obj_midi_clock)
+		obj_midi_clock.bpm = obj_song.bpm*obj_song.songRate
+	}
+	
+	obj_song.notespeed /= obj_song.songRate;
+	
 	obj_song.strums = strumLine;
-	obj_song.allNotes = allNotes;
+	obj_song.unspawnNotes = allNotes;
 	obj_song.allEvents = allEvents;
 	
 	var obj = instance_create(0,0,obj_modchart)
 
-	for (bb=0;bb<(obj_song.notes*2);bb++) {
+	for (bb=0;bb<(obj_song.notes*2);bb++) {		
 		variable_struct_set(obj,"strum"+string(bb),{
 			x:0,
 			y:0,
@@ -746,4 +750,5 @@ function scr_songint(songname, modNum) {
 		});
 	}
 	
+	obj.onCreate();
 }

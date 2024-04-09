@@ -24,26 +24,21 @@ if ((keyboard_check_pressed(ord("Z")) xor keyboard_check_pressed(vk_enter) xor g
         obj_badguy.paused=true
     }
 }
-if paused=false {
+
+if paused { return; }
 
 //countdown
 if image_alpha>0{
-	image_alpha-=0.05
+	image_alpha-=0.05 * deltaMult
 }
 
-songpos=audio_sound_get_track_position(songplaying)
-songlength = audio_sound_length(songplaying)
-
-if songlength <= 1 && (!(os_browser == browser_not_a_browser) || os_type == os_operagx) {
-	songpos = 0
-	wasStreaming = true
-	songlength = 100; // seems like audio files are streamed instead of preloaded, so wait for them to load
+if instance_exists(obj_midi_clock) {
+	songpos=audio_sound_get_track_position(songplaying)
 } else {
-	if wasStreaming {
-		scr_songint(obj_stats.songgoing.name,obj_stats.modgoing);
-		wasStreaming = false
-	}
+	songpos += delta_time/1000000*songRate
 }
+
+songlength = audio_sound_length(songplaying)
 
 var prevStep = curStep;
 
@@ -69,13 +64,13 @@ if instance_exists(obj_modchart) {
 }
 
 // check note and event spawns
-for(index = 0; index < array_length(allNotes); index++) {   
-	var note = allNotes[index];
+for(index = 0; index < array_length(unspawnNotes); index++) {   
+	var note = unspawnNotes[index];
 		
 	//pcall
 	/*if !instance_exists(note) {
-		var index = array_get_index(allNotes,note);
-		array_delete(allNotes,index,1)
+		var index = array_get_index(unspawnNotes,note);
+		array_delete(unspawnNotes,index,1)
 			
 		continue;
 	}*/
@@ -83,12 +78,25 @@ for(index = 0; index < array_length(allNotes); index++) {
 	var diff= note.strumTime - (songpos*1000);
 		
 	// actually spawn it
-	if diff<1500 {
+	if diff<(1500 / (notespeed/1.5)) {
+		note.prevNote = variable_struct_exists(lastNoteLane,note.note) ? variable_struct_get(lastNoteLane,note.note) : undefined
+		
 		instance_activate_object(note);
+		
+		with(note){ // song runs step after notes lol, i should change that somehow
+			event_perform(ev_step, ev_step_normal);
+		}
 			
 		//remove from unspawned
-		var index = array_get_index(allNotes,note);
-		array_delete(allNotes,index,1)
+		var index = array_get_index(unspawnNotes,note);
+		array_delete(unspawnNotes,index,1)
+		
+		var type = note.type;
+		
+		//hitable
+		if (type=1 || type=2 || type=3 || type=8 || type=9) {
+			variable_struct_set(lastNoteLane,note.note,note)
+		}
 		
 		continue;
 	} else {
@@ -119,14 +127,14 @@ if window_has_focus() {
     surfaceh=false
 }
 //mcdonalds
-    if keyboard_check_pressed(ord("9")) xor gamepad_button_check_pressed(0,gp_shoulderl){
-        mcdonalds=!mcdonalds
-        if mcdonalds=false {
-            playericon=spr_momgotmcdonalds
-        } else {
-            playericon=spr_dudeicon
-        }
+if keyboard_check_pressed(ord("9")) xor gamepad_button_check_pressed(0,gp_shoulderl){
+    mcdonalds=!mcdonalds
+    if mcdonalds=false {
+        playericon=spr_momgotmcdonalds
+    } else {
+        playericon=spr_dudeicon
     }
+}
 /*
 //skipping long intros
     if skipto!=0 && songpos<skipto && songpos!=0 {
@@ -157,50 +165,49 @@ if window_has_focus() {
     }
 */
 //game over
-    if skill>=100 {
-        room_goto(rm_gameover)
-    }
+if skill>=100 {
+    room_goto(rm_gameover)
+}
 //end song
-    if songpos>=(songlength-0.1) {
-        //scoreing
+if songpos>=(songlength-0.1) && audio_is_playing(songplaying) {
+    //scoreing
 		
-		var songStats = obj_stats.songgoing.stats
+	var songStats = obj_stats.songgoing.stats
 		
-        if saved=false {
-            //im going to redo all of this when I remake all these menus and
-            //this is going to be so much better
-            if coolscore>songStats.score {
-                songStats.score=coolscore
-            }
-			
-			if misses<songStats.misses || !songStats.beat {
-                songStats.misses=misses
-            }
-			
-			songStats.beat = true;
-			songStats.timesPlayed += 1;
-			songStats.isNew = false;
-			
-			saved=true
-			scr_saveoptions();
+    if saved=false {
+        //im going to redo all of this when I remake all these menus and
+        //this is going to be so much better
+        if coolscore>songStats.score {
+            songStats.score=coolscore
         }
+			
+		if misses<songStats.misses || !songStats.beat {
+            songStats.misses=misses
+        }
+			
+		songStats.beat = true;
+		songStats.timesPlayed += 1;
 		songStats.isNew = false;
-        obj_stats.skipped=false
-        //where to go
-        if obj_stats.freeplay = false {
-            if !instance_exists(obj_fadeout){
-                instance_create(0,0,obj_fadeout)
-                obj_fadeout.roomgo=rm_cutscenes
-                obj_stats.cutgoing+=0.1
-            }
-        } else {
-            if !instance_exists(obj_fadeout) {
-                instance_create(0,0,obj_fadeout)
-            }
-            obj_fadeout.roomgo=rm_freeplay
-            if !audio_is_playing(mus_menu) {
-                audio_play_sound(mus_menu,9999,true)
-            }
+			
+		saved=true
+		scr_saveoptions();
+    }
+	songStats.isNew = false;
+    obj_stats.skipped=false
+    //where to go
+    if obj_stats.freeplay = false {
+        if !instance_exists(obj_fadeout){
+            instance_create(0,0,obj_fadeout)
+            obj_fadeout.roomgo=rm_cutscenes
+            obj_stats.cutgoing+=0.1
+        }
+    } else {
+        if !instance_exists(obj_fadeout) {
+            instance_create(0,0,obj_fadeout)
+        }
+        obj_fadeout.roomgo=rm_freeplay
+        if !audio_is_playing(mus_menu) {
+            audio_play_sound(mus_menu,9999,true)
         }
     }
 }

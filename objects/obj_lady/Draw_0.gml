@@ -14,7 +14,7 @@ if instance_exists(obj_midi_clock) {
         }
     }
     if frame<maxframes {
-        frame+=0.15
+        frame+=0.15*deltaMult
     }
 }
 if drawgirl=true {

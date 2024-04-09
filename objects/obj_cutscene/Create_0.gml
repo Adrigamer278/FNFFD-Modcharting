@@ -31,9 +31,11 @@ if obj_stats.modgoing = 0 {
 //do the stuff
 if fadein instance_create(0,0,obj_fadein);
 
-if cutbox <=-1 { // no textbox for cutscene so just unlock week
+if cutbox <=-1 { // no textbox for cutscene so just continue
 	event_user(0)
 	return;
 }
+
+room_speed=30
 instance_create(0,0,cutbox)
 

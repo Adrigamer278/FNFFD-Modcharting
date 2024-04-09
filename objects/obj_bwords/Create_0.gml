@@ -6,4 +6,3 @@ text[1]="bopeebo"
 text[2]="roses"
 part=0
 tick=0
-

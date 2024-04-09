@@ -53,6 +53,7 @@ var allPaused = false;
 
 if instance_exists(obj_song) {
 	allPaused = obj_song.paused;
+	deltaTime*= obj_song.songRate
 }
 
 // IF SYSTEM IS ACTIVE
@@ -134,7 +135,7 @@ if (isEnabled && !allPaused)
 					switch(_d[0]) // PROPERTY COUNT
 					{
 					case 1:
-						if (is_method(_t[TGMX_T_EASE])) 
+						if (is_callable(_t[TGMX_T_EASE])) 
 						{ 
 							_d[1](_t[TGMX_T_EASE](_time, _d[2], _d[3], _t[TGMX_T_DURATION], _t), _target, _d[4], _t); // note: _d[4] is variable string name
 						} 

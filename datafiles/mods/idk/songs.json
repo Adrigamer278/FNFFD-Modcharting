@@ -7,5 +7,14 @@
     "freeplayIcon": {
         "spr": "images/normalblevel.png",
     }
+  },
+  {
+    "name": "ferocious",
+    "song": "audios/ferocious.ogg",
+    "chart": "charts/ferocious.json",
+    
+    "freeplayIcon": {
+        "spr": "images/ferociousicon.png",
+    }
   }
 ]

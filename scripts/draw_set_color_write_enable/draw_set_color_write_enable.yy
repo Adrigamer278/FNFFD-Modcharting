@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "draw_set_color_write_enable",
-  "isCompatibility": true,
-  "isDnD": false,
-  "parent": {
-    "name": "draw",
-    "path": "folders/Scripts/compatibility/draw.yy",
+  "$GMScript":"",
+  "%Name":"draw_set_color_write_enable",
+  "isCompatibility":true,
+  "isDnD":false,
+  "name":"draw_set_color_write_enable",
+  "parent":{
+    "name":"draw",
+    "path":"folders/Scripts/compatibility/draw.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

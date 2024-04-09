@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"",
+  "%Name":"note",
+  "name":"note",
+  "parent":{
+    "name":"TweenGMX",
+    "path":"folders/Extensiones/TweenGMX.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

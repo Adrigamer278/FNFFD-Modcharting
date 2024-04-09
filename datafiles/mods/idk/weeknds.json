@@ -1,0 +1,32 @@
+[
+  {
+    "wknd": 0,
+
+    "name": "FIRE IN THE WHAT?",
+    "songs": [
+      "lobotomy"
+    ],
+
+    "difficulty": "geomty dahs.",
+    "assets": [
+      {
+	"spr": "images/normallevelsspr.png"
+      }
+    ]
+  },
+  {
+    "wknd": 1,
+
+    "name": "a WHAT friday?",
+    "songs": [
+      "ferocious"
+    ],
+
+    "difficulty": "10 hours bambi spam track",
+    "assets": [
+      {
+	"spr": "images/ferociousthumbnail.png"
+      }
+    ]
+  }
+]

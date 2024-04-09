@@ -13,8 +13,8 @@ draw_sprite_ext(spr_whitepixel,0,0,0,800,800,0,make_colour_hsv(cc,160,197),0.25)
 
 var xGap = 400
 
-y+=((-1*sel)*40-y)/5
-x+=((-1*curMod)*xGap-x)/5
+y+=((-1*sel)*40-y)/5 * deltaMult
+x+=((-1*curMod)*xGap-x)/5 * deltaMult
 
 for (modInd=0;modInd<array_length(obj_stats.loadedMods);modInd++) {
 	var modData = obj_stats.loadedMods[modInd]

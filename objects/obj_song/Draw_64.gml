@@ -227,12 +227,14 @@ if paused=true {
     if (keyboard_check_pressed(ord("Z")) or keyboard_check_pressed(vk_enter) or gamepad_button_check_pressed(0,gp_face1)) {
         switch(sel) {
             case 1:
+				scr_clearwindows()
                 if !instance_exists(obj_fadeout) {
                     instance_create(0,0,obj_fadeout)
                     obj_fadeout.roomgo=room
                     audio_stop_sound(songplaying)
                     //reset skip
                     obj_stats.skipped=false
+					
                 }
             break;
             case 2:

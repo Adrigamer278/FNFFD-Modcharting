@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "TGMX_System",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Admin",
-    "path": "folders/Extensiones/TweenGMX/Admin.yy",
+  "$GMScript":"",
+  "%Name":"TGMX_System",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TGMX_System",
+  "parent":{
+    "name":"Admin",
+    "path":"folders/Extensiones/TweenGMX/Admin.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -146,228 +146,230 @@ function scr_charset(argument0, argument1) {
 	        break;
 	        }
 	    }
-	        //sprite_index=idle
+	    sprite_index=idle[0]
+		frame=0
 	}
 	with(obj_badguy) {
-	if obj_stats.joshmode=false {
-	switch(baddie){
-	    case -7: //dan
-	        idle[0]=spr_danidle
-	        ayy=spr_danayy
-	        anim[0]=spr_danleft
-	        anim[1]=spr_dandown
-	        anim[2]=spr_danup
-	        anim[3]=spr_danright
-	        pause=spr_danpause
-	    break;
-	    case -6: //cromp
-	        idle[0]=spr_crompidle1
-	        idle[1]=spr_crompidle2
-	        numidle=1
-	        ayy=spr_crompayy
-	        anim[0]=spr_crompleft
-	        anim[1]=spr_crompdown
-	        anim[2]=spr_crompup
-	        anim[3]=spr_crompright
-	        anim[4]=spr_crompleft
-	        anim[5]=spr_crompdown
-	        anim[6]=spr_crompup
-	        anim[7]=spr_crompright
-	        pause=spr_cromppause
-	        image_xscale=4
-	        image_yscale=4
-	        framerate=0.2
-	    break;
-	    case -5: //nermal
-	        idle[0]=spr_nermalidle
-	        ayy=spr_nermalfloat
-	        anim[0]=spr_nermalleft
-	        anim[1]=spr_nermaldown
-	        anim[2]=spr_nermalup
-	        anim[3]=spr_nermalright
-	        pause=spr_nermalpause
-	    break;
-	    case -4: //slick
-	        idle[0]=spr_slickidle
-	        ayy=spr_slickayy
-	        anim[0]=spr_slickleft
-	        anim[1]=spr_slickdown
-	        anim[2]=spr_slickup
-	        anim[3]=spr_slickright
-	        pause=spr_slickpause
-	    break;
-	    case -4.1: //slick anime
-	        idle[0]=spr_slickidle2
-	        ayy=spr_slickayy2
-	        anim[0]=spr_slickleft2
-	        anim[1]=spr_slickdown2
-	        anim[2]=spr_slickup2
-	        anim[3]=spr_slickright2
-	        pause=spr_harrispause
-	    break;
-	    case -2: //george
-	        idle[0]=spr_georgeidle
-	        everybeat=2
-	        ayy=spr_georgeidle
-	        anim[0]=spr_georgeleft
-	        anim[1]=spr_georgedown
-	        anim[2]=spr_georgeup
-	        anim[3]=spr_georgeright
-	        anim[4]=spr_georgeleftalt
-	        anim[5]=spr_georgedownalt
-	        anim[6]=spr_georgeupalt
-	        anim[7]=spr_georgerightalt
-	        pause=spr_georgepause
-	    break;
-	    case -1:
-	        //the eyes. what was wrong
-	        //with his eyes?
-	        scr_default();
-	    break;
-	    case 0: //teachvee
-	        idle[0]=spr_TVidle
-	        ayy=spr_TVayy
-	        anim[0]=spr_TVleft
-	        anim[1]=spr_TVdown
-	        anim[2]=spr_TVup
-	        anim[3]=spr_TVright
-	        anim[4]=spr_TVleftalt
-	        anim[5]=spr_TVdownalt
-	        anim[6]=spr_TVupalt
-	        anim[7]=spr_TVrightalt
-	        pause=spr_TVpause
-	        framerate=0.2
-	    break;
-	    case 1: //strad
-	        idle[0]=spr_stradidle
-	        ayy=spr_stradayy
-	        anim[0]=spr_stradleft
-	        anim[1]=spr_straddown
-	        anim[2]=spr_stradup
-	        anim[3]=spr_stradright
-	        anim[4]=spr_stradleftalt
-	        anim[5]=spr_straddownalt
-	        anim[6]=spr_stradupalt
-	        anim[7]=spr_stradrightalt
-	        pause=spr_stradpause
-	    break;
-	    case 2: //cyan
-	        idle[0]=spr_cyanidle
-	        ayy=spr_cyanayy
-	        anim[0]=spr_cyanleft
-	        anim[1]=spr_cyandown
-	        anim[2]=spr_cyanup
-	        anim[3]=spr_cyanright
-	        anim[4]=spr_cyanleftalt
-	        anim[5]=spr_cyandownalt
-	        anim[6]=spr_cyanupalt
-	        anim[7]=spr_cyanrightalt
-	        pause=spr_cyanpause
-	    break;
-	    case 3: //cd-boy
-	        idle[0]=spr_cdboyidle
-	        //idle[1]=spr_boubeeidle
-	        //numidle=1
-	        ayy=spr_cdboyhack
-	        anim[0]=spr_cdboyleft
-	        anim[1]=spr_cdboydown
-	        anim[2]=spr_cdboyup
-	        anim[3]=spr_cdboyright
-	        anim[8]=spr_cdboyleftb
-	        anim[9]=spr_cdboydownb
-	        anim[10]=spr_cdboyupb
-	        anim[11]=spr_cdboyrightb
-	        pause=spr_cdboypause
-	    break;
-	    case 4: //buddy
-	        idle[0]=spr_buddyidle
-	        ayy=spr_buddyayy
-	        anim[0]=spr_buddyleft
-	        anim[1]=spr_buddydown
-	        anim[2]=spr_buddyup
-	        anim[3]=spr_buddyright
-	        anim[4]=spr_buddyleftanime
-	        anim[5]=spr_buddydownanime
-	        anim[6]=spr_buddyupanime
-	        anim[7]=spr_buddyrightanime
-	        pause=spr_buddypause
-	    break;
-	    case 5: //scary cd-boy
-	        idle[0]=spr_cdboyidle3
-	        ayy=spr_cdboyultracrash
-	        anim[0]=spr_cdboyleft3
-	        anim[1]=spr_cdboydown3
-	        anim[2]=spr_cdboyup3
-	        anim[3]=spr_cdboyright3
-	        anim[8]=spr_cdboyleft3
-	        anim[9]=spr_cdboydown3
-	        anim[10]=spr_cdboyup3
-	        anim[11]=spr_cdboyright3
-	        pause=spr_cdboypause3
-	        framerate=0.2
-	    break;
-	    case 5.1: //scary cd-boy
-	        idle[0]=spr_cdboyidle3s
-	        anim[8]=spr_cdboyleft3s
-	        anim[9]=spr_cdboydown3s
-	        anim[10]=spr_cdboyup3s
-	        anim[11]=spr_cdboyright3s
-	        pause=spr_cdboypause3s
-	    break;
-	    case 6: //gunk
-	        idle[0]=spr_gunkidle1
-	        idle[1]=spr_gunkidle2
-	        idle[2]=spr_gunkidle1
-	        idle[3]=spr_gunkidle2
-	        numidle=3
-	        ayy=spr_gunkayy
-	        anim[0]=spr_gunkleft
-	        anim[1]=spr_gunkdown
-	        anim[2]=spr_gunkup
-	        anim[3]=spr_gunkright
-	        anim[8]=spr_gunkleft
-	        anim[9]=spr_gunkdown
-	        anim[10]=spr_gunkup
-	        anim[11]=spr_gunkright
-	        pause=spr_gunkpause
-	    break;
-	    case 7: //gunk PISSED OFF
-	        idle[0]=spr_gunkidlepiss
-	        ayy=spr_gunkayy
-	        anim[0]=spr_gunkleftpiss
-	        anim[1]=spr_gunkdownpiss
-	        anim[2]=spr_gunkuppiss
-	        anim[3]=spr_gunkrightpiss
-	        anim[4]=spr_gunkleftpissalt
-	        anim[5]=spr_gunkdownpissalt
-	        anim[6]=spr_gunkuppissalt
-	        anim[7]=spr_gunkrightpissalt
-	        anim[8]=spr_gunkleftpiss
-	        anim[9]=spr_gunkdownpiss
-	        anim[10]=spr_gunkuppiss
-	        anim[11]=spr_gunkrightpiss
+		if obj_stats.joshmode=false {
+			switch(baddie){
+			    case -7: //dan
+			        idle[0]=spr_danidle
+			        ayy=spr_danayy
+			        anim[0]=spr_danleft
+			        anim[1]=spr_dandown
+			        anim[2]=spr_danup
+			        anim[3]=spr_danright
+			        pause=spr_danpause
+			    break;
+			    case -6: //cromp
+			        idle[0]=spr_crompidle1
+			        idle[1]=spr_crompidle2
+			        numidle=1
+			        ayy=spr_crompayy
+			        anim[0]=spr_crompleft
+			        anim[1]=spr_crompdown
+			        anim[2]=spr_crompup
+			        anim[3]=spr_crompright
+			        anim[4]=spr_crompleft
+			        anim[5]=spr_crompdown
+			        anim[6]=spr_crompup
+			        anim[7]=spr_crompright
+			        pause=spr_cromppause
+			        image_xscale=4
+			        image_yscale=4
+			        framerate=0.2
+			    break;
+			    case -5: //nermal
+			        idle[0]=spr_nermalidle
+			        ayy=spr_nermalfloat
+			        anim[0]=spr_nermalleft
+			        anim[1]=spr_nermaldown
+			        anim[2]=spr_nermalup
+			        anim[3]=spr_nermalright
+			        pause=spr_nermalpause
+			    break;
+			    case -4: //slick
+			        idle[0]=spr_slickidle
+			        ayy=spr_slickayy
+			        anim[0]=spr_slickleft
+			        anim[1]=spr_slickdown
+			        anim[2]=spr_slickup
+			        anim[3]=spr_slickright
+			        pause=spr_slickpause
+			    break;
+			    case -4.1: //slick anime
+			        idle[0]=spr_slickidle2
+			        ayy=spr_slickayy2
+			        anim[0]=spr_slickleft2
+			        anim[1]=spr_slickdown2
+			        anim[2]=spr_slickup2
+			        anim[3]=spr_slickright2
+			        pause=spr_harrispause
+			    break;
+			    case -2: //george
+			        idle[0]=spr_georgeidle
+			        everybeat=2
+			        ayy=spr_georgeidle
+			        anim[0]=spr_georgeleft
+			        anim[1]=spr_georgedown
+			        anim[2]=spr_georgeup
+			        anim[3]=spr_georgeright
+			        anim[4]=spr_georgeleftalt
+			        anim[5]=spr_georgedownalt
+			        anim[6]=spr_georgeupalt
+			        anim[7]=spr_georgerightalt
+			        pause=spr_georgepause
+			    break;
+			    case -1:
+			        //the eyes. what was wrong
+			        //with his eyes?
+			        scr_default();
+			    break;
+			    case 0: //teachvee
+			        idle[0]=spr_TVidle
+			        ayy=spr_TVayy
+			        anim[0]=spr_TVleft
+			        anim[1]=spr_TVdown
+			        anim[2]=spr_TVup
+			        anim[3]=spr_TVright
+			        anim[4]=spr_TVleftalt
+			        anim[5]=spr_TVdownalt
+			        anim[6]=spr_TVupalt
+			        anim[7]=spr_TVrightalt
+			        pause=spr_TVpause
+			        framerate=0.2
+			    break;
+			    case 1: //strad
+			        idle[0]=spr_stradidle
+			        ayy=spr_stradayy
+			        anim[0]=spr_stradleft
+			        anim[1]=spr_straddown
+			        anim[2]=spr_stradup
+			        anim[3]=spr_stradright
+			        anim[4]=spr_stradleftalt
+			        anim[5]=spr_straddownalt
+			        anim[6]=spr_stradupalt
+			        anim[7]=spr_stradrightalt
+			        pause=spr_stradpause
+			    break;
+			    case 2: //cyan
+			        idle[0]=spr_cyanidle
+			        ayy=spr_cyanayy
+			        anim[0]=spr_cyanleft
+			        anim[1]=spr_cyandown
+			        anim[2]=spr_cyanup
+			        anim[3]=spr_cyanright
+			        anim[4]=spr_cyanleftalt
+			        anim[5]=spr_cyandownalt
+			        anim[6]=spr_cyanupalt
+			        anim[7]=spr_cyanrightalt
+			        pause=spr_cyanpause
+			    break;
+			    case 3: //cd-boy
+			        idle[0]=spr_cdboyidle
+			        //idle[1]=spr_boubeeidle
+			        //numidle=1
+			        ayy=spr_cdboyhack
+			        anim[0]=spr_cdboyleft
+			        anim[1]=spr_cdboydown
+			        anim[2]=spr_cdboyup
+			        anim[3]=spr_cdboyright
+			        anim[8]=spr_cdboyleftb
+			        anim[9]=spr_cdboydownb
+			        anim[10]=spr_cdboyupb
+			        anim[11]=spr_cdboyrightb
+			        pause=spr_cdboypause
+			    break;
+			    case 4: //buddy
+			        idle[0]=spr_buddyidle
+			        ayy=spr_buddyayy
+			        anim[0]=spr_buddyleft
+			        anim[1]=spr_buddydown
+			        anim[2]=spr_buddyup
+			        anim[3]=spr_buddyright
+			        anim[4]=spr_buddyleftanime
+			        anim[5]=spr_buddydownanime
+			        anim[6]=spr_buddyupanime
+			        anim[7]=spr_buddyrightanime
+			        pause=spr_buddypause
+			    break;
+			    case 5: //scary cd-boy
+			        idle[0]=spr_cdboyidle3
+			        ayy=spr_cdboyultracrash
+			        anim[0]=spr_cdboyleft3
+			        anim[1]=spr_cdboydown3
+			        anim[2]=spr_cdboyup3
+			        anim[3]=spr_cdboyright3
+			        anim[8]=spr_cdboyleft3
+			        anim[9]=spr_cdboydown3
+			        anim[10]=spr_cdboyup3
+			        anim[11]=spr_cdboyright3
+			        pause=spr_cdboypause3
+			        framerate=0.2
+			    break;
+			    case 5.1: //scary cd-boy
+			        idle[0]=spr_cdboyidle3s
+			        anim[8]=spr_cdboyleft3s
+			        anim[9]=spr_cdboydown3s
+			        anim[10]=spr_cdboyup3s
+			        anim[11]=spr_cdboyright3s
+			        pause=spr_cdboypause3s
+			    break;
+			    case 6: //gunk
+			        idle[0]=spr_gunkidle1
+			        idle[1]=spr_gunkidle2
+			        idle[2]=spr_gunkidle1
+			        idle[3]=spr_gunkidle2
+			        numidle=3
+			        ayy=spr_gunkayy
+			        anim[0]=spr_gunkleft
+			        anim[1]=spr_gunkdown
+			        anim[2]=spr_gunkup
+			        anim[3]=spr_gunkright
+			        anim[8]=spr_gunkleft
+			        anim[9]=spr_gunkdown
+			        anim[10]=spr_gunkup
+			        anim[11]=spr_gunkright
+			        pause=spr_gunkpause
+			    break;
+			    case 7: //gunk PISSED OFF
+			        idle[0]=spr_gunkidlepiss
+			        ayy=spr_gunkayy
+			        anim[0]=spr_gunkleftpiss
+			        anim[1]=spr_gunkdownpiss
+			        anim[2]=spr_gunkuppiss
+			        anim[3]=spr_gunkrightpiss
+			        anim[4]=spr_gunkleftpissalt
+			        anim[5]=spr_gunkdownpissalt
+			        anim[6]=spr_gunkuppissalt
+			        anim[7]=spr_gunkrightpissalt
+			        anim[8]=spr_gunkleftpiss
+			        anim[9]=spr_gunkdownpiss
+			        anim[10]=spr_gunkuppiss
+			        anim[11]=spr_gunkrightpiss
         
-	        pause=spr_gunkpause
-	    break;
-	    }
-	} else {
-	switch(baddie){
-	    case 0:
-	        idle=spr_TVidlejm
-	        ayy=spr_TVupjm
-	        up=spr_TVupjm
-	        down=spr_TVdownjm
-	        left=spr_TVleftjm
-	        right=spr_TVrightjm
-	        upalt=spr_TVupjm
-	        downalt=spr_TVdownjm
-	        leftalt=spr_TVleftjm
-	        rightalt=spr_TVrightjm
-	        framenumbs=4
-	        framenumbs2=24
-	    break;
-	}
-	}
-	//sprite_index=idle
+			        pause=spr_gunkpause
+			    break;
+			    }
+		} else {
+			switch(baddie){
+				case 0:
+				    idle=spr_TVidlejm
+				    ayy=spr_TVupjm
+				    up=spr_TVupjm
+				    down=spr_TVdownjm
+				    left=spr_TVleftjm
+				    right=spr_TVrightjm
+				    upalt=spr_TVupjm
+				    downalt=spr_TVdownjm
+				    leftalt=spr_TVleftjm
+				    rightalt=spr_TVrightjm
+				    framenumbs=4
+				    framenumbs2=24
+				break;
+			}
+		}
+		sprite_index=idle[0]
+		frame=0
 	}
 }

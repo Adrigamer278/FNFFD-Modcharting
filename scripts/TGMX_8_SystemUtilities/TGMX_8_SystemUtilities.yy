@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "TGMX_8_SystemUtilities",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "User",
-    "path": "folders/Extensiones/TweenGMX/User.yy",
+  "$GMScript":"",
+  "%Name":"TGMX_8_SystemUtilities",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TGMX_8_SystemUtilities",
+  "parent":{
+    "name":"User",
+    "path":"folders/Extensiones/TweenGMX/User.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

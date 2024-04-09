@@ -5,8 +5,8 @@ draw_sprite_ext(spr_menubacksg,2,-250,-690,2,2,0,c_white,1)
 
 var yGap = 400
 
-x+=(-400*sel-x)/5
-y+=(-yGap*curMod-y + defY)/5
+x+=(-400*sel-x)/5 * deltaMult
+y+=(-yGap*curMod-y + defY)/5 * deltaMult
 
 var yDiff = (y-defY)
 
@@ -90,5 +90,23 @@ for (mInd=0;mInd<array_length(validMods);mInd++) {
 	draw_set_halign(fa_right);
 	draw_text(380,260 + modoff + yDiff,string_hash_to_newline(string("Difficulty:")+string("#")+string((curWknd.beat ? curWknd.beatData : curWknd).difficulty)))
 	draw_set_halign(fa_left);
+	
+	//select arrows
+	
+	var arrowX=5
+	
+	if mInd == 0 {
+		draw_sprite_ext(spr_selectthing,0,arrowX,400-38.5+(50*0.35*0.5) + modoff + yDiff,0.5,0.35,0,c_white,1) // down
+	} else if mInd == array_length(validMods)-1 {
+		draw_sprite_ext(spr_selectthing,1,arrowX,400-38.5+(50*0.35*0.5) + modoff + yDiff,0.5,0.35,0,c_white,1) // up
+	} else {
+		draw_sprite_ext(spr_selectthing,1,arrowX,400-37.5 + modoff + yDiff,0.5,0.35,0,c_white,1) // up
+		draw_sprite_ext(spr_selectthing,0,arrowX,400-21.5 + modoff + yDiff,0.5,0.35,0,c_white,1) // down	
+	}
+	
+	draw_set_font(fnt_comic2);
+	draw_set_halign(fa_left);
+	
+	draw_text_transformed(arrowX + 30,modoff + yDiff +(400+400-22.5-53.5)/2 + 2.25 + cos(2+current_time/200)*2,modData.name,0.75,0.75,0)
 }
 

@@ -3,6 +3,11 @@ image_speed=0
 
 strumTime = 60*(y/(obj_song.bpm*4*48*obj_song.notespeed))*1000
 
+prevNote = undefined
+noteHitbox = 166;
+
+canBeHit = false;
+
 note=0
 type=1
 event=0

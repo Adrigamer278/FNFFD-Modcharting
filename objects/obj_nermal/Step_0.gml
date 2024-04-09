@@ -17,9 +17,9 @@ switch(mode) {
             //animations
                 if (frame<image_number+10 && press=true) {
                     if sprite_index=ayy {
-                        frame+=0.2
+                        frame+=0.2*deltaMult
                     } else {
-                        frame+=0.2 //0.5
+                        frame+=0.2*deltaMult //0.5
                     }
                 } else {
                     press=false
@@ -42,7 +42,7 @@ switch(mode) {
                     }
                     if bop=true && press=false{
                         if frame<image_number-1 {
-                            frame+=0.15
+                            frame+=0.15*deltaMult
                         } else {
                             bop=false
                         }
@@ -60,9 +60,9 @@ switch(mode) {
     case "walkl":
         depth=0
         if obj_song.paused = false {
-            speedup+=0.025
+            speedup+=0.025*deltaMult
             speedup=clamp(speedup,0,0.2)
-            x-=2.5+(speedup*speedup)
+            x-=2.5*deltaMult+(speedup*speedup)
             x=round(x)
             sprite_index=spr_nermalwalk
             image_speed=0.25
@@ -81,7 +81,7 @@ switch(mode) {
         y=yy+(sin(current_time/150)*5)
         y=round(y)
         if obj_song.paused=false {
-            x+=3.2
+            x+=3.2 * deltaMult
             x=round(x)
             sprite_index=spr_nermalfloat
             if x>=428 {
@@ -116,7 +116,7 @@ switch(mode) {
     case "walkr":
         if obj_song.paused=false {
             depth=0
-            x+=1.25
+            x+=1.25 * deltaMult
             x=round(x)
             sprite_index=spr_nermalwalk
             image_speed=0.125

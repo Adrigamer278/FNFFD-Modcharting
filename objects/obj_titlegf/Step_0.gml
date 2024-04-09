@@ -7,7 +7,7 @@ if instance_exists(obj_midi_clock) {
 }
 if bop=true {
     if image_index<framenumbs {
-        image_index+=0.2
+        image_index+=0.2*deltaMult
     }
 }
 

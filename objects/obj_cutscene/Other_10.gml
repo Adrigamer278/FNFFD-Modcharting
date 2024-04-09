@@ -1,4 +1,5 @@
 
+room_speed = 60
 if (array_length(obj_stats.weeksonglist) = obj_stats.weekgoing)
 {
 	var weekData = obj_stats.loadedMods[obj_stats.modgoing].weeknds[obj_stats.weekndgoing]
